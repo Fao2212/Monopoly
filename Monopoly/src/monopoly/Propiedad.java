@@ -11,16 +11,18 @@ import javax.swing.ImageIcon;
  *
  * @author ferol
  */
-public abstract class Propiedad {
+public abstract class Propiedad {//Preguntar la mejor manera de ver si es hipotecable
     
     String nombre;//Calle 
     int precio;
     int alquiler;
-    //Jugador propietario;
+    Jugador propietario;
+    //enum Clasificacion
     /*enum+calle a la que pertenece + color*/int grupoDeColor;
     int valorDeHipoteca;
     ImageIcon imagen;
     int tipo;//Segun se instancie se le asigna su tipo
+    boolean hipotecada;
     
     public abstract void aumentarAlquiler();
     public abstract void cobrarAlquiler();

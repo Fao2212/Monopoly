@@ -11,7 +11,10 @@ package monopoly;
  */
 
 public abstract class Casilla {
+    
     boolean empty;
+    boolean asignada;
+    int cantidadDeFichas;
     int index;//Puede quitarse si no se necesita
     int tipo;//Especial,Carta,Propiedad
 
@@ -41,7 +44,7 @@ class CasillaPropiedad extends Casilla{
 
     @Override
     public void doAction() {
-        getPropiedad();
+        getPropiedad();//Se da la opcion de comprar y si no se pone en subasta
     }
     
 }
@@ -55,6 +58,12 @@ class CasillaEspecial extends Casilla{
     }
     
     //Hacer todos los metodos especiales 
+    public void irALaCarcel(){
+        
+    }
+    public void cobrarImpuestos(){
+        
+    }
     
 }
 
@@ -64,6 +73,10 @@ class CasillaCarta extends Casilla{
     @Override
     public void doAction() {
         //Sacar una carta y hacer su funcion
+    }
+    
+    public void sacarCarta(){
+        //Se saca la primera carta y se aplica su efecto
     }
      
 }
