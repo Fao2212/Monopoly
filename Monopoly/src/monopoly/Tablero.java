@@ -27,6 +27,8 @@ public class Tablero {
     Jugador jugadores[];
     int indiceJugadorActual;
     Jugador jugadorActual;
+    int cantidadDeJugadores = 0;
+    int maxPlayers;
     final static int POSICIONES_CHANCE[] = {7,22,36};
     final static int POSICIONES_COMUNNITY[] = {2,17,33};
     final static int POSICIONES_FERROCARRILES[] = {5,15,25,35};
@@ -49,6 +51,20 @@ public class Tablero {
         
     }
     
+    
+    //Servidor crea un array y el jugador al seleccionar su pieza se le muestra el que le toco, se hace un linkeo de la pos del arry con el jugador segun orden de entrada o selec de pieza
+    //Sabiendo las pos del array se asigna los no repetidos a una pos se les muestra esperando jugaores a los demas
+    //Se vuelve a pedir que los repetidos lanzen el dado
+    
+    public void asignarPosJugador() {
+        
+    }
+    
+    public void agregarJugador(Jugador jugador){
+        //Cuado hace conexion se da al jugador su numero y se recibe su pieza
+        jugadores[cantidadDeJugadores++] = jugador;
+    }
+    
     public void asignarCasillas(){
         
     }
@@ -69,29 +85,13 @@ public class Tablero {
     
     public void preOrden(ArrayList<Jugador> arraylist){//Funcion que compruebe
         
-
             dadosInicio = arraylist.size();
             int[] array = new int[dadosInicio] ;
             for (int i = 0; i < dadosInicio; i++) {
                 array[i] = lanzarDados();
             }
             
-            int mayor = mayor(array);//Que esta parte se otra funcion que se repita con el mismo array
-            if(seRepite(mayor, array)){
-                for (int i = 0; i < cantidadDeRepeticiones(mayor, array); i++) {//Referencias de jugador que tengan un array inicial
-                    lanzarDados();//para el array del jugador
-                    //Al mayor se saca de la lista y al menor tambien y se le asigna sus posiciones
-                    
-                }
-                
-            }
-            else{
-                //Saca de la lista
-            }
-            
-            preOrden(arraylist);
-        //agregar todos a los dados miedo 
-
+            escogerOrden(array, array);
         
     }
     
@@ -125,17 +125,27 @@ public class Tablero {
          return contador;
     }
     
-    
-    public Jugador[] escogerOrden(){//Crea un array con lanzadas de dados simuladas y espera hasta que todos los jugadores toquen lanzar dados
-        //cuando ya todos esten llama a este metodo
-        //Manejar con dos listas
-        //Espera a que todos los jugadores lancen el dado y va anadiendo a un array
-        //Cuando ya tiraron todos los jugadores se ordena el array o se hace una lista se sacan y quedan solo los repetidos
-        //Se crea otro array donde se guardan las posiciones, si se repetia alguna se vuelve a pedir que tiren los dados
-        //Pero solo para los repetidos mientras los otros tienen puesto esperando jugadores
-        //Cuando este todo listo se devuelve la lista ordenada
-        //Y es la que se usa para el orden de los turnos
-        return new Jugador[2];//Cambiar
+    public void escogerOrden(int[] original,int[] temporal){
+        
+        int mayor = mayor(temporal);
+        if(seRepite(mayor, temporal)){
+            int rep = cantidadDeRepeticiones(mayor, temporal);
+            int[] array = new int[rep];
+            for (int i = 0; i < rep; i++) {//Referencias de jugador que tengan un array inicial
+                array[i] = lanzarDados();//para el array del jugador que muestre el numero que salio  
+            }
+            
+            mayor = mayor(array);
+            if(seRepite(mayor, array)){
+            
+            }
+            
+
+        }
+        else{
+            asignarPosJugador();
+        }
+
     }
     
     public void moverPieza(int espacios){
@@ -144,7 +154,7 @@ public class Tablero {
     }
     
     public void venderPropiedad(Propiedad propiedad,Jugador jugador){
-        Banco.comprarPropiedad();
+        //Banco.comprarPropiedad();
     }
     
     public void hipotecarPropiedad(){
@@ -183,4 +193,5 @@ public class Tablero {
     public void levantarHipoteca(/*Propiedad*/){
         
     }
+
 }
