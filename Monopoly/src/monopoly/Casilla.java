@@ -18,6 +18,14 @@ public abstract class Casilla {
     int index;//Puede quitarse si no se necesita
     int tipo;//Especial,Carta,Propiedad
 
+    public Casilla(int index, int tipo) {
+        this.empty = this.asignada =  false;
+        this.index = index;
+        this.tipo = tipo;
+    }
+
+    
+    
     public boolean isEmpty() {
         return empty;
     }
@@ -34,7 +42,8 @@ class CasillaPropiedad extends Casilla{
     
     final Propiedad propiedad;
 
-    public CasillaPropiedad(Propiedad propiedad) {
+    public CasillaPropiedad(Propiedad propiedad, int index, int tipo) {
+        super(index, tipo);
         this.propiedad = propiedad;
     }
 
@@ -50,7 +59,10 @@ class CasillaPropiedad extends Casilla{
 }
 
 class CasillaEspecial extends Casilla{
-    
+
+    public CasillaEspecial(int index, int tipo) {
+        super(index, tipo);
+    }
     
     @Override
     public void doAction() {
@@ -58,17 +70,23 @@ class CasillaEspecial extends Casilla{
     }
     
     //Hacer todos los metodos especiales 
-    public void irALaCarcel(){
-        
+    public void irALaCarcel(Jugador jugador){
+        //tablero.enviaralacarcel
     }
-    public void cobrarImpuestos(){
-        
+    public void cobrarImpuestos(Jugador jugador,int cantidad){
+        Banco.cobrarAJugador(jugador, cantidad);
+    }
+    public void GO(Jugador jugador){
+        Banco.pagarAJugador(jugador, 200);
     }
     
 }
 
 class CasillaCarta extends Casilla{
 
+    public CasillaCarta(int index, int tipo) {
+        super(index, tipo);
+    }
 
     @Override
     public void doAction() {
