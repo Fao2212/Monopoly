@@ -5,6 +5,8 @@
  */
 package monopoly;
 
+import Logic.Cartas;
+import Logic.Jugador;
 import Random.CustomRandom;
 import java.util.ArrayList;
 
@@ -18,8 +20,8 @@ public class Tablero {
     Edificio casas[];
     Edificio hoteles[];
     Propiedad propiedades[];
-    Carta arcaComunal[];
-    Carta casualidad[];
+    Cartas arcaComunal[];
+    Cartas casualidad[];
     int dadosInicio;
     int dadosMalvados[] = new int[100];
     int contadorDeDados = 0;

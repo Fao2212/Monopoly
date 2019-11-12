@@ -5,6 +5,8 @@
  */
 package monopoly;
 
+import Logic.Jugador;
+
 /**
  *
  * @author ferol

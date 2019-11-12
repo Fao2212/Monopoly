@@ -5,6 +5,7 @@
  */
 package monopoly;
 
+import Logic.Jugador;
 import javax.swing.ImageIcon;
 
 /**

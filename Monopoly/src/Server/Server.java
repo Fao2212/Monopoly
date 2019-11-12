@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import monopoly.Tablero;
 
 /**
  *
@@ -22,11 +23,13 @@ public class Server {
     Socket[] clientes;
     ArrayList<ThreadServer> threadClientes;
     boolean running;
+    int maxplayers;
+    Tablero tablero;//Iniciar jugadores con el array de clientes
 
     public Server() {//Un thread para cada cliente con su respectivo outpu y input se deja con un while true usar un bool
         running = true;
         threadClientes = new ArrayList<ThreadServer>();
-        iniciarPantalla();
+        iniciarPantalla();//Boton con cantidad de jugadores luego de que se toca se inicia el server
         serverRunning();
     }
     
@@ -52,6 +55,7 @@ public class Server {
                 ThreadServer thread = new ThreadServer(clientes[i],this,i);
                 thread.start();
                 threadClientes.add(thread);
+                i++;
             }
             
             while (running) {            
