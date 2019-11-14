@@ -22,15 +22,12 @@ public class Tablero {
     Propiedad propiedades[];
     Cartas arcaComunal[];
     Cartas casualidad[];
-    int dadosInicio;
-    int dadosMalvados[] = new int[100];
-    int contadorDeDados = 0;
-    ArrayList<Jugador> ordenJugadores[];//Lleva el orden
     Jugador jugadores[];
     int indiceJugadorActual;
+    Integer dadosInicio[];
+    int contRepPos;
     Jugador jugadorActual;
-    int cantidadDeJugadores = 0;
-    int maxPlayers;
+    int cantidadDeJugadores = 0;//Aumenta o se asigna
     final static int POSICIONES_CHANCE[] = {7,22,36};
     final static int POSICIONES_COMUNNITY[] = {2,17,33};
     final static int POSICIONES_FERROCARRILES[] = {5,15,25,35};
@@ -46,29 +43,49 @@ public class Tablero {
     public Tablero() {
         
         indiceJugadorActual = 0;
+        contRepPos = 0;
         casillas = new Casilla[40];
         casas = new Edificio[32];
         hoteles = new Edificio[12];
         propiedades = new Propiedad[22];
+        jugadores = new Jugador[3];
+       dadosInicio(); 
         
     }
     
+    public void dadosInicio(){//Funcion al azar de suma para los dados   cuando ya esten asignadas las posiciones entonces se lanza el dado normal
+        dadosInicio = new Integer[12];
+        for (int i = 1; i < 13; i++) {
+            dadosInicio[i-1] = i;
+        }
+        CustomRandom.shuffle(dadosInicio);
+    }
     
-    //Servidor crea un array y el jugador al seleccionar su pieza se le muestra el que le toco, se hace un linkeo de la pos del arry con el jugador segun orden de entrada o selec de pieza
-    //Sabiendo las pos del array se asigna los no repetidos a una pos se les muestra esperando jugaores a los demas
-    //Se vuelve a pedir que los repetidos lanzen el dado
-    
-    public void asignarPosJugador() {
-        
+    public void asignarPosJugador(Jugador jugador) {//Se asigna en la conexion y cuando cada uno le de tirar dados muestra el numero que tienen asignado y se muestra el acomodo de las posiciones
+        jugador.dadoInicio = dadosInicio[contRepPos++];
     }
     
     public void agregarJugador(Jugador jugador){
-        //Cuado hace conexion se da al jugador su numero y se recibe su pieza
         jugadores[cantidadDeJugadores++] = jugador;
     }
     
     public void asignarCasillas(){
-        
+        //Aca se cargan las tarjetas y se ponen en sus respectivos campos y se rellenas los array de tarjetas
+    }
+    
+    public void ordenarJugadores(){
+        int i, j,n= jugadores.length;
+        Jugador tmp;
+        for (i=1;i<n;i++){
+            for (j=n-1;j>=i;j--){
+                if (jugadores[j].dadoInicio > jugadores[j-1].dadoInicio){
+                     tmp = jugadores[j];
+                     jugadores[j] = jugadores[j-1];
+                     jugadores[j-1]=tmp;
+                }
+            }
+        }
+
     }
     
     public void iniciarJuego(){
@@ -85,17 +102,11 @@ public class Tablero {
         
     }
     
-    public void preOrden(ArrayList<Jugador> arraylist){//Funcion que compruebe
+   /* public void preOrden(ArrayList<Jugador> arraylist){//Funcion que compruebe
         
-            dadosInicio = arraylist.size();
-            int[] array = new int[dadosInicio] ;
-            for (int i = 0; i < dadosInicio; i++) {
-                array[i] = lanzarDados();
-            }
-            
-            escogerOrden(array, array);
         
-    }
+        
+    }*/
     
     public int mayor(int[] array){
         int mayor = -1;
@@ -127,7 +138,7 @@ public class Tablero {
          return contador;
     }
     
-    public void escogerOrden(int[] original,int[] temporal){
+   /* public void escogerOrden(int[] original,int[] temporal){
         
         int mayor = mayor(temporal);
         if(seRepite(mayor, temporal)){
@@ -148,11 +159,13 @@ public class Tablero {
             asignarPosJugador();
         }
 
-    }
+    }*/
     
     public void moverPieza(int espacios){
         //Jugador.pieza.pos = pos+espacios;
-        //O un for que lo vaya moviendo 1 por uno hasta que llegue a espacios
+        for (int i = 0; i < espacios; i++) {
+            //Jugador.ficha.pos = pos+espacios;
+        }
     }
     
     public void venderPropiedad(Propiedad propiedad,Jugador jugador){
@@ -194,6 +207,12 @@ public class Tablero {
     
     public void levantarHipoteca(/*Propiedad*/){
         
+    }
+    
+    private void imprimirJugadores(){
+        for (int i = 0; i < cantidadDeJugadores; i++) {
+            System.out.println(jugadores[i].nombre);
+        }
     }
 
 }

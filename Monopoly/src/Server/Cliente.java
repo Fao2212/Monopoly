@@ -5,7 +5,8 @@
  */
 package Server;
 
-import GUI.formPantallaClientePrueba;
+import GUI.formTablero;
+import GUI.inicioCliente;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -16,18 +17,20 @@ import javax.swing.JOptionPane;
  *
  * @author ferol
  */
-public class Cliente {
+public class Cliente {//Solamente pinta la pantalla
 
    Socket socket;
-   formPantallaClientePrueba pantalla;
+    formTablero pantallaTablero;
+    inicioCliente pantallaInicio;
    DataInputStream entrada;
    DataOutputStream salida;
    String nombre;
+   //Jugador
+   //Referencia a figura
 
     public Cliente()
      {
          iniciarPantalla();
-         conexion();
      }
     
 
@@ -37,29 +40,45 @@ public class Cliente {
      }
      
          public void iniciarPantalla(){
-            pantalla = new formPantallaClientePrueba();
+             
+            pantallaInicio = new inicioCliente();
             java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                pantalla.setVisible(true);
+                pantallaInicio.setVisible(true);
+            }
+        });
+            pantallaInicio.setCliente(this);
+    }
+         
+    public void iniciarPantallaTablero(){
+        pantallaTablero = new formTablero();
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                pantallaTablero.setVisible(true);
             }
         });
     }
          
-    public void conexion(){
+    public void conexion(){//Enviar la pos de la ficha y agregar jugador relacion y asignar numero y posicion
       try {
           
          socket = new Socket("localhost", 35557);
          entrada = new DataInputStream(socket.getInputStream());
          salida = new DataOutputStream(socket.getOutputStream());
          nombre = JOptionPane.showInputDialog("Introducir Nick :");
-         pantalla.setTitle(nombre);
+         pantallaTablero.setTitle(nombre);
          salida.writeUTF(nombre);
          System.out.println("1. Envia el nombre del cliente: "+nombre);
+         
       } catch (IOException e) {
+          
          System.out.println("\tEl servidor no esta levantado");
          System.out.println("\t=============================");
+         
       }
 
-      new ThreadCliente(entrada, salida).start();
+      new ThreadCliente(entrada, salida,pantallaTablero).start();//Meter dentro del try
+      //Aqui se podria setear la ficha
+      
     }
 }

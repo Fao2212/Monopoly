@@ -14,16 +14,19 @@ import java.util.Random;
 public class Jugador {
     public int dinero;
     public boolean turno;
+    public int dadoInicio;
     //tablero
     public String nombre;
     //array de propiedades o q en propiedades tengan un jugador
     public int resultado;
+    int numeroDeJugador;
     
-    public Jugador(String nombre){//recibe tablero
+    public Jugador(String nombre,int numeroDeJugador){//recibe tablero
         this.nombre = nombre;
         this.turno = false;
         this.dinero = 1500;
         this.resultado = 0;
+        this.numeroDeJugador = numeroDeJugador;
     }
     
     public int lanzarDado(){

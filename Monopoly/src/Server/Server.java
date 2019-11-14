@@ -22,22 +22,27 @@ public class Server {
     formPantallaServidorPrueba pantalla;
     Socket[] clientes;
     ArrayList<ThreadServer> threadClientes;
+    ArrayList<ThreadCliente> threadClientesClientes;
     boolean running;
     int maxplayers;
-    Tablero tablero;//Iniciar jugadores con el array de clientes
+    Tablero tablero;//Asociar jugador-cliente
 
     public Server() {//Un thread para cada cliente con su respectivo outpu y input se deja con un while true usar un bool
+        
         running = true;
         threadClientes = new ArrayList<ThreadServer>();
+        threadClientesClientes = new ArrayList<ThreadCliente>();
+        tablero = new Tablero();
         iniciarPantalla();//Boton con cantidad de jugadores luego de que se toca se inicia el server
         serverRunning();
+        
     }
     
     public static void main(String[] args) {
         new Server();
     }
     
-    public void serverRunning(){//Inicia los thread de los clientes
+    public void serverRunning(){
         try {
             socket = new ServerSocket(35557);
             clientes = new Socket[3];
@@ -54,7 +59,7 @@ public class Server {
                 clientes[i].getPort());
                 ThreadServer thread = new ThreadServer(clientes[i],this,i);
                 thread.start();
-                threadClientes.add(thread);
+                threadClientes.add(thread);//Server se empareja con el jugador y entonces se hace un nuevo jugadore ne el tablero
                 i++;
             }
             
@@ -74,6 +79,11 @@ public class Server {
                 pantalla.setVisible(true);
             }
         });
+    }
+    
+    public void escribirMensaje(String mensaje, ThreadServer server) throws IOException{
+        server.salida.writeInt(2);
+        server.salida.writeUTF(mensaje);
     }
     
 }

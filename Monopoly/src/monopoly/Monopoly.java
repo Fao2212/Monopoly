@@ -19,8 +19,7 @@ public class Monopoly {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Cartas c = new AdvanceToGo();
-        System.out.println(c.tipo);
+        Tablero tablero = new Tablero();
     }
     
 }
