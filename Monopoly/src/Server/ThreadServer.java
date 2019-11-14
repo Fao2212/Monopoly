@@ -62,7 +62,6 @@ public class ThreadServer extends Thread{
           // inicializa para lectura y escritura con stream de cliente
           entrada=new DataInputStream(cliente.getInputStream());//comunic
           salida=new DataOutputStream(cliente.getOutputStream());//comunic
-          System.out.println("lee el nombre");
           this.setNameUser(entrada.readUTF());
           System.out.println("1. Leyo nombre: " + nameUser);
           this.player = new Jugador(nameUser,servidor.tablero);//Agregar algo para unir al cliente
@@ -73,7 +72,9 @@ public class ThreadServer extends Thread{
         int opcion;
         while (running) {        
             try {
+                System.out.println("esperando");
                 opcion = entrada.readInt();
+                System.out.println("enviado");
                 cases(opcion);
             } catch (IOException ex) {
                 Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -85,7 +86,10 @@ public class ThreadServer extends Thread{
     public void cases(int caso) throws IOException{
         switch(caso){
             case 1:
-                salida.writeInt(servidor.tablero.lanzarDado());
+                salida.writeInt(4);
+                int dados =servidor.tablero.lanzarDado();
+                System.out.println(dados);
+                salida.writeInt(dados);
                 //Mover ficha
                 break;
             case 2:
@@ -94,6 +98,7 @@ public class ThreadServer extends Thread{
                 for (int i = 0; i < servidor.threadClientes.size(); i++) {//Excluir al que envia el mensaje
                     if(servidor.threadClientes.get(i)!= this){
                         servidor.escribirMensaje(mensaje, servidor.threadClientes.get(i));
+                        System.out.println("entro");
                     }
                 }
                 break;

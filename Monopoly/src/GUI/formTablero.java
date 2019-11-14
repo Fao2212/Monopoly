@@ -200,7 +200,7 @@ public class formTablero extends javax.swing.JFrame {//Crear los custom labels o
         try {
             thread.cases(3);
         } catch (IOException ex) {
-            Logger.getLogger(formPantallaClientePrueba.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(formTablero.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -210,7 +210,7 @@ public class formTablero extends javax.swing.JFrame {//Crear los custom labels o
         try {//Cambiar nombres de botones y crear enum de casos
             thread.cases(1);
         } catch (IOException ex) {
-            Logger.getLogger(formPantallaClientePrueba.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(formTablero.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

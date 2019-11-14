@@ -46,8 +46,10 @@ public class Server {
     
     public void serverRunning(){
         
-        while (selected) {            
+        while (selected) {   
+            System.out.println("asd");
             if (selected == false) {
+                System.out.println("p");
                 break;
             }
         }
