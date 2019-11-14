@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 public class formTablero extends javax.swing.JFrame {//Crear los custom labels ordenar las pos y luego un array con un valor de pos ordenar ese array por el valor de su pos
 
     ThreadCliente thread;
+    boolean inicio;
     
     public formTablero() {
         initComponents();
@@ -72,7 +73,7 @@ public class formTablero extends javax.swing.JFrame {//Crear los custom labels o
 
         jButton2.setText("jButton1");
 
-        jButton3.setText("jButton1");
+        jButton3.setText("Dados");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -88,9 +89,9 @@ public class formTablero extends javax.swing.JFrame {//Crear los custom labels o
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,7 +128,7 @@ public class formTablero extends javax.swing.JFrame {//Crear los custom labels o
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addContainerGap(354, Short.MAX_VALUE))
         );
 
         jPanel5.setLayout(null);
@@ -204,6 +205,8 @@ public class formTablero extends javax.swing.JFrame {//Crear los custom labels o
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        
         try {//Cambiar nombres de botones y crear enum de casos
             thread.cases(1);
         } catch (IOException ex) {

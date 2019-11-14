@@ -54,7 +54,9 @@ public class ThreadCliente extends Thread{
         switch(caso){
             case 1:
                 salida.writeInt(1);
+                System.out.println("omn");
                 pantalla.textCliente.setText(pantalla.textCliente.getText()+String.valueOf(entrada.readInt()));
+                System.out.println("do");
                 break;
             case 2:
                 String mensaje = entrada.readUTF();

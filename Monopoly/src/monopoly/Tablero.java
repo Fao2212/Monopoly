@@ -8,7 +8,6 @@ package monopoly;
 import Logic.Cartas;
 import Logic.Jugador;
 import Random.CustomRandom;
-import java.util.ArrayList;
 
 /**
  *
@@ -22,13 +21,13 @@ public class Tablero {
     Propiedad propiedades[];
     Cartas arcaComunal[];
     Cartas casualidad[];
-    ArrayList<Jugador> ordenJugadores[];//Lleva el orden
     public Jugador jugadores[];
     int indiceJugadorActual;
     Integer dadosInicio[];
     int contRepPos;
     Jugador jugadorActual;
     int cantidadDeJugadores = 0;//Aumenta o se asigna
+    int maxJugadores;
     final static int POSICIONES_CHANCE[] = {7,22,36};
     final static int POSICIONES_COMUNNITY[] = {2,17,33};
     final static int POSICIONES_FERROCARRILES[] = {5,15,25,35};
@@ -49,9 +48,13 @@ public class Tablero {
         casas = new Edificio[32];
         hoteles = new Edificio[12];
         propiedades = new Propiedad[22];
-        jugadores = new Jugador[3];
        dadosInicio(); 
         
+    }
+
+    public void setMaxJugadores(int maxJugadores) {
+        this.maxJugadores = maxJugadores;
+        jugadores = new Jugador[maxJugadores];
     }
     
     public void dadosInicio(){//Funcion al azar de suma para los dados   cuando ya esten asignadas las posiciones entonces se lanza el dado normal

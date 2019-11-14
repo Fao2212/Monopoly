@@ -1,0 +1,3 @@
+GUI.customLabelCasilla
+GUI.customLabelCasillaEspecial
+GUI.customLabel

@@ -37,6 +37,16 @@ public class ThreadServer extends Thread{
         
     }
 
+    public Jugador getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Jugador player) {
+        this.player = player;
+    }
+    
+    
+
     public String getNameUser() {
         return nameUser;
     }
