@@ -7,6 +7,7 @@ package CartasChance;
 
 import Logic.Cartas;
 import static Logic.Cartas.Tipo.Chance;
+import Logic.Jugador;
 
 /**
  *
@@ -22,8 +23,8 @@ public class YourBuildingLoanMatures extends Cartas{
     
     //suma 150
     @Override
-    public void Action(){
-        this.jugador.dinero = this.jugador.dinero + 150;
+    public void Action(Jugador jugador){
+        jugador.dinero = jugador.dinero + 150;
     }
     
     

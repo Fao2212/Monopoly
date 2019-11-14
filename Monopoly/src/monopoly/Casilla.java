@@ -5,6 +5,8 @@
  */
 package monopoly;
 
+import Logic.Jugador;
+
 /**
  *
  * @author ferol
@@ -16,7 +18,7 @@ public abstract class Casilla {
     boolean asignada;
     int cantidadDeFichas;
     int index;//Puede quitarse si no se necesita
-    int tipo;//Especial,Carta,Propiedad
+    public int tipo;//Especial,Carta,Propiedad
 
     public Casilla(int index, int tipo) {
         this.empty = this.asignada =  false;
@@ -34,7 +36,7 @@ public abstract class Casilla {
         return index;
     }
     
-    public abstract void doAction();
+    public abstract Propiedad doAction();
     
 }
 
@@ -52,8 +54,8 @@ class CasillaPropiedad extends Casilla{
     }
 
     @Override
-    public void doAction() {
-        getPropiedad();//Se da la opcion de comprar y si no se pone en subasta
+    public Propiedad doAction() {
+        return getPropiedad();//Se da la opcion de comprar y si no se pone en subasta
     }
     
 }
@@ -65,8 +67,9 @@ class CasillaEspecial extends Casilla{
     }
     
     @Override
-    public void doAction() {
+    public Propiedad doAction() {
         //Depende de que hace por pos de casilla hacer un switch
+        return null;
     }
     
     //Hacer todos los metodos especiales 
@@ -89,8 +92,9 @@ class CasillaCarta extends Casilla{
     }
 
     @Override
-    public void doAction() {
+    public Propiedad doAction() {
         //Sacar una carta y hacer su funcion
+        return null;
     }
     
     public void sacarCarta(){

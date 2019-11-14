@@ -7,6 +7,7 @@ package CartasChance;
 
 import Logic.Cartas;
 import static Logic.Cartas.Tipo.Chance;
+import Logic.Jugador;
 
 /**
  *
@@ -21,8 +22,8 @@ public class PayPoorTaxOf15 extends Cartas{
     
     //resta 15
     @Override
-    public void Action(){
-        this.jugador.dinero = this.jugador.dinero - 15;
+    public void Action(Jugador jugador){
+        jugador.dinero = jugador.dinero - 15;
     }
     
     

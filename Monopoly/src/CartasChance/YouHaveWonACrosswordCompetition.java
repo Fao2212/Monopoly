@@ -7,6 +7,7 @@ package CartasChance;
 
 import Logic.Cartas;
 import static Logic.Cartas.Tipo.Chance;
+import Logic.Jugador;
 
 /**
  *
@@ -22,8 +23,8 @@ public class YouHaveWonACrosswordCompetition extends Cartas{
     
     //suma 100
     @Override
-    public void Action(){
-        this.jugador.dinero = this.jugador.dinero + 100;
+    public void Action(Jugador jugador){
+        jugador.dinero = jugador.dinero + 100;
     }
     
 }
