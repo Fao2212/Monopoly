@@ -55,7 +55,7 @@ public class ThreadServer extends Thread{
           System.out.println("lee el nombre");
           this.setNameUser(entrada.readUTF());
           System.out.println("1. Leyo nombre: " + nameUser);
-          this.player = new Jugador(nameUser,numeroDeJugador);
+          this.player = new Jugador(nameUser,servidor.tablero);//Agregar algo para unir al cliente
           servidor.tablero.agregarJugador(player);
     	}
     	catch (IOException e) {  e.printStackTrace();     }

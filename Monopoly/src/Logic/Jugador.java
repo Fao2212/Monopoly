@@ -26,7 +26,6 @@ public class Jugador {
     public Tablero tablero;
     public String nombre;
     public ArrayList<Propiedad>propiedades;
-    public int resultado;                   //mientras avanza le resta a este, por lo que en cada turno empieza en 0
     public Cartas [] carta;
     public Ficha ficha = null;
     public Casilla casilla;

@@ -22,9 +22,6 @@ public class Tablero {
     Propiedad propiedades[];
     Cartas arcaComunal[];
     Cartas casualidad[];
-    int dadosInicio;
-    int dadosMalvados[] = new int[100];
-    int contadorDeDados = 0;
     ArrayList<Jugador> ordenJugadores[];//Lleva el orden
     public Jugador jugadores[];
     int indiceJugadorActual;
