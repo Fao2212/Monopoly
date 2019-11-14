@@ -1,2 +1,0 @@
-Logic.Arista
-Logic.ListaAristas
