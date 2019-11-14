@@ -1,4 +1,0 @@
-monopoly.CasillaPropiedad
-monopoly.CasillaEspecial
-monopoly.Casilla
-monopoly.CasillaCarta
