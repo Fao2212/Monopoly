@@ -28,7 +28,10 @@ public class Tablero {
     ArrayList<Jugador> ordenJugadores[];//Lleva el orden
     public Jugador jugadores[];
     int indiceJugadorActual;
+    Integer dadosInicio[];
+    int contRepPos;
     Jugador jugadorActual;
+    int cantidadDeJugadores = 0;//Aumenta o se asigna
     final static int POSICIONES_CHANCE[] = {7,22,36};
     final static int POSICIONES_COMUNNITY[] = {2,17,33};
     final static int POSICIONES_FERROCARRILES[] = {5,15,25,35};
@@ -44,15 +47,49 @@ public class Tablero {
     public Tablero() {
         
         indiceJugadorActual = 0;
+        contRepPos = 0;
         casillas = new Casilla[40];
         casas = new Edificio[32];
         hoteles = new Edificio[12];
         propiedades = new Propiedad[22];
+        jugadores = new Jugador[3];
+       dadosInicio(); 
         
     }
     
+    public void dadosInicio(){//Funcion al azar de suma para los dados   cuando ya esten asignadas las posiciones entonces se lanza el dado normal
+        dadosInicio = new Integer[12];
+        for (int i = 1; i < 13; i++) {
+            dadosInicio[i-1] = i;
+        }
+        CustomRandom.shuffle(dadosInicio);
+    }
+    
+    public void asignarPosJugador(Jugador jugador) {//Se asigna en la conexion y cuando cada uno le de tirar dados muestra el numero que tienen asignado y se muestra el acomodo de las posiciones
+        jugador.dadoInicio = dadosInicio[contRepPos++];
+    }
+    
+    public void agregarJugador(Jugador jugador){
+        jugadores[cantidadDeJugadores++] = jugador;
+    }
+    
     public void asignarCasillas(){
-        
+        //Aca se cargan las tarjetas y se ponen en sus respectivos campos y se rellenas los array de tarjetas
+    }
+    
+    public void ordenarJugadores(){
+        int i, j,n= jugadores.length;
+        Jugador tmp;
+        for (i=1;i<n;i++){
+            for (j=n-1;j>=i;j--){
+                if (jugadores[j].dadoInicio > jugadores[j-1].dadoInicio){
+                     tmp = jugadores[j];
+                     jugadores[j] = jugadores[j-1];
+                     jugadores[j-1]=tmp;
+                }
+            }
+        }
+
     }
     
     public void iniciarJuego(){
@@ -69,33 +106,11 @@ public class Tablero {
         
     }
     
-    public void preOrden(ArrayList<Jugador> arraylist){//Funcion que compruebe
+   /* public void preOrden(ArrayList<Jugador> arraylist){//Funcion que compruebe
         
-
-            dadosInicio = arraylist.size();
-            int[] array = new int[dadosInicio] ;
-            for (int i = 0; i < dadosInicio; i++) {
-                array[i] = lanzarDados();
-            }
-            
-            int mayor = mayor(array);//Que esta parte se otra funcion que se repita con el mismo array
-            if(seRepite(mayor, array)){
-                for (int i = 0; i < cantidadDeRepeticiones(mayor, array); i++) {//Referencias de jugador que tengan un array inicial
-                    lanzarDados();//para el array del jugador
-                    //Al mayor se saca de la lista y al menor tambien y se le asigna sus posiciones
-                    
-                }
-                
-            }
-            else{
-                //Saca de la lista
-            }
-            
-            preOrden(arraylist);
-        //agregar todos a los dados miedo 
-
         
-    }
+        
+    }*/
     
     public int mayor(int[] array){
         int mayor = -1;
@@ -127,26 +142,38 @@ public class Tablero {
          return contador;
     }
     
-    
-    public Jugador[] escogerOrden(){//Crea un array con lanzadas de dados simuladas y espera hasta que todos los jugadores toquen lanzar dados
-        //cuando ya todos esten llama a este metodo
-        //Manejar con dos listas
-        //Espera a que todos los jugadores lancen el dado y va anadiendo a un array
-        //Cuando ya tiraron todos los jugadores se ordena el array o se hace una lista se sacan y quedan solo los repetidos
-        //Se crea otro array donde se guardan las posiciones, si se repetia alguna se vuelve a pedir que tiren los dados
-        //Pero solo para los repetidos mientras los otros tienen puesto esperando jugadores
-        //Cuando este todo listo se devuelve la lista ordenada
-        //Y es la que se usa para el orden de los turnos
-        return new Jugador[2];//Cambiar
-    }
+   /* public void escogerOrden(int[] original,int[] temporal){
+        
+        int mayor = mayor(temporal);
+        if(seRepite(mayor, temporal)){
+            int rep = cantidadDeRepeticiones(mayor, temporal);
+            int[] array = new int[rep];
+            for (int i = 0; i < rep; i++) {//Referencias de jugador que tengan un array inicial
+                array[i] = lanzarDados();//para el array del jugador que muestre el numero que salio  
+            }
+            
+            mayor = mayor(array);
+            if(seRepite(mayor, array)){
+            
+            }
+            
+
+        }
+        else{
+            asignarPosJugador();
+        }
+
+    }*/
     
     public void moverPieza(int espacios){
         //Jugador.pieza.pos = pos+espacios;
-        //O un for que lo vaya moviendo 1 por uno hasta que llegue a espacios
+        for (int i = 0; i < espacios; i++) {
+            //Jugador.ficha.pos = pos+espacios;
+        }
     }
     
     public void venderPropiedad(Propiedad propiedad,Jugador jugador){
-        Banco.comprarPropiedad();
+        //Banco.comprarPropiedad();
     }
     
     public void hipotecarPropiedad(){
@@ -185,4 +212,11 @@ public class Tablero {
     public void levantarHipoteca(/*Propiedad*/){
         
     }
+    
+    private void imprimirJugadores(){
+        for (int i = 0; i < cantidadDeJugadores; i++) {
+            System.out.println(jugadores[i].nombre);
+        }
+    }
+
 }

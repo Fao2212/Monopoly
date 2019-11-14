@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package monopoly;
+package Server;
 
 /**
  *
  * @author ferol
  */
-class Ficha {
-    
+public class Message {
+    //Metodo statico con un switch para grupo de acciones o enviar objetos      
 }

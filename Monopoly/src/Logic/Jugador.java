@@ -18,6 +18,11 @@ import monopoly.Tablero;
 public class Jugador {
     public int dinero;
     public boolean turno;
+
+    public int dadoInicio;
+    public int resultado;
+    int numeroDeJugador;
+   // public Jugador(String nombre,int numeroDeJugador){//recibe tablero
     public Tablero tablero;
     public String nombre;
     public ArrayList<Propiedad>propiedades;
@@ -27,12 +32,12 @@ public class Jugador {
     public Casilla casilla;
     public int pos;
     public boolean carcel;
-    
     public Jugador(String nombre, Tablero t){
         this.nombre = nombre;
         this.turno = false;
         this.dinero = 1500;
         this.resultado = 0;
+        this.numeroDeJugador = numeroDeJugador;
         this.tablero = t;
         this.propiedades = new ArrayList<>();
         this.carta = new Cartas[2];

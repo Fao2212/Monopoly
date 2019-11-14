@@ -35,7 +35,7 @@ public class Banco {
    }
    
    public static boolean comprobarDineroDeJugador(Jugador jugador,int cantidad){
-       if(/*jugador.dinero >= cantidad*/)
+       if(true/*jugador.dinero >= cantidad*/)
             return true;
        else
            return false;
