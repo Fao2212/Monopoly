@@ -16,13 +16,17 @@ import java.util.ArrayList;
  */
 public class Tablero {
     
-    Casilla casillas[];
+    public Casilla casillas[];
     Edificio casas[];
     Edificio hoteles[];
     Propiedad propiedades[];
     Cartas arcaComunal[];
     Cartas casualidad[];
-    Jugador jugadores[];
+    int dadosInicio;
+    int dadosMalvados[] = new int[100];
+    int contadorDeDados = 0;
+    ArrayList<Jugador> ordenJugadores[];//Lleva el orden
+    public Jugador jugadores[];
     int indiceJugadorActual;
     Integer dadosInicio[];
     int contRepPos;

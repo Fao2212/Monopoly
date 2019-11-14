@@ -16,9 +16,10 @@ public class Ficha {
     public ImageIcon imagen;
     public String nombre;
     private boolean usado;
-    public Jugador jugador = null;
-    public Point pos;                   //iguala a la posicion del inicio
+    //public Jugador jugador = null;
+    //public int pos = 0;
     
+    //no se si recibe ImageIcon
     public Ficha(String nombre){
         this.nombre = nombre;
         this.usado = false;
@@ -28,6 +29,16 @@ public class Ficha {
     public void setUsado() {
         this.usado = true;
     }
+    
+    //no se si se setea la imagen
+    /*public void siguienteCasilla(int destino){
+        if (pos != destino)
+            pos++;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
+    }*/
     
     
 }

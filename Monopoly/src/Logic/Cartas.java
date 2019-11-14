@@ -12,7 +12,6 @@ import javax.swing.ImageIcon;
  * @author migue
  */
 public class Cartas {
-    public Jugador jugador = null;
     public String info;
     public ImageIcon imagen;
     
@@ -23,12 +22,9 @@ public class Cartas {
     public Tipo tipo;
     
     
-    //cuando sale la carta se la asigna al jugador
-    public void asignarPersona(Jugador j){
-        this.jugador = j;
-    }
     
-    public void Action(){};
+    
+    public void Action(Jugador jugador){};
     
     
 }

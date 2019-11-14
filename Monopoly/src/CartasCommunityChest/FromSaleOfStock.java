@@ -7,6 +7,7 @@ package CartasCommunityChest;
 
 import Logic.Cartas;
 import static Logic.Cartas.Tipo.CommunityChest;
+import Logic.Jugador;
 
 /**
  *
@@ -21,8 +22,8 @@ public class FromSaleOfStock extends Cartas{
     
     //suma 50
     @Override
-    public void Action(){
-        this.jugador.dinero = this.jugador.dinero + 50;
+    public void Action(Jugador jugador){
+        jugador.dinero = jugador.dinero + 50;
     }
     
 }
