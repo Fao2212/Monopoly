@@ -114,14 +114,14 @@ public class ThreadCliente extends Thread{
             //Siguiente espacio
             //pos y sumarle el i
             //Condicion de cuando llegue a 39
-            pantalla.tableroGrafico.pintarLabel(pantalla.tableroGrafico.siguienteEspacio(pantalla.tableroGrafico.casillas[0+i]));//Aqui va la pos actual
+            pantalla.tableroGrafico.pintarLabel(pantalla.tableroGrafico.siguienteEspacio(pantalla.tableroGrafico.casillas[i]));//Aqui va la pos actual
             try {
                 sleep(500);
             } catch (InterruptedException ex) {
                 Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
             if(i != espacios)
-                pantalla.tableroGrafico.despintarLabel(pantalla.tableroGrafico.siguienteEspacio(pantalla.tableroGrafico.casillas[0+i]));
+                pantalla.tableroGrafico.despintarLabel(pantalla.tableroGrafico.siguienteEspacio(pantalla.tableroGrafico.casillas[i]));
         }
     
     }

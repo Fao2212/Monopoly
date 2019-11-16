@@ -28,9 +28,9 @@ public class GUITablero {
         setearTablero();
     }
     
-    public GUIFicha siguienteEspacio(customLabel casilla){
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 3; j++) {
+    public GUIFicha siguienteEspacio(customLabel casilla){//Metodo del ERROR
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 2; j++) {
                 if (casilla.fichas[i][j].isEmpty()) {
                     GUIFicha label =casilla.fichas[i][j];
                     return label;
@@ -41,12 +41,14 @@ public class GUITablero {
     }
     
     public void pintarLabel(GUIFicha casilla){//Primero con el background luego con iconos
+        System.out.println("pinto");
         casilla.label.setBackground(Color.red);
         casilla.setEmpty(false);
         //casilla.label.repaint();
     }
     
     public void despintarLabel(GUIFicha casilla){
+        System.out.println("despinto");
         casilla.label.setBackground(new Color(0, 0, 0, 0));
         casilla.setEmpty(true);
         //casilla.label.repaint();

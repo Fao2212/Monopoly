@@ -80,8 +80,7 @@ public class Server {
             
             lanzamientos = 0;
             
-            System.out.println("lklkl");
-            //Funcion iniciar juego
+            //Funcion iniciar juego asignar el turno false o true y poner las fichas en el go
             while (running) {            
             
             }

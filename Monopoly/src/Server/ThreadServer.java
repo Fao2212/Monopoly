@@ -59,24 +59,32 @@ public class ThreadServer extends Thread{
     public void run() {//Por alguna parte de aqui un wait para esperar jugadores
         try
     	{
-          // inicializa para lectura y escritura con stream de cliente
-          entrada=new DataInputStream(cliente.getInputStream());//comunic
-          salida=new DataOutputStream(cliente.getOutputStream());//comunic
+          entrada=new DataInputStream(cliente.getInputStream());
+          salida=new DataOutputStream(cliente.getOutputStream());
           this.setNameUser(entrada.readUTF());
           System.out.println("1. Leyo nombre: " + nameUser);
-          this.player = new Jugador(nameUser,servidor.tablero);//Agregar algo para unir al cliente
+          this.player = new Jugador(nameUser,servidor.tablero);
           servidor.tablero.agregarJugador(player);
     	}
     	catch (IOException e) {  e.printStackTrace();     }
-        //Un ciclo mas para escoger el orden
+        synchronized(this){
+            try {
+                if(servidor.numeroDeConexiones < servidor.maxplayers)
+                    wait();
+                else{
+                    System.out.println("lubresoy");
+                    servidor.releaseThreads();
+                }
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ThreadServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         int opcion;
         
         while (running) {        
             try {
-                System.out.println("esperando");
                 opcion = entrada.readInt();
                 System.out.println(opcion);
-                System.out.println("enviado");
                 cases(opcion);
             } catch (IOException ex) {
                 Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,7 +101,6 @@ public class ThreadServer extends Thread{
                 int dados =servidor.tablero.lanzarDado();
                 servidor.moverPiezaTodos(dados);
                 System.out.println(dados);
-                //Mover ficha
                 break;
             case 2:
                 String mensaje = entrada.readUTF();
@@ -101,7 +108,6 @@ public class ThreadServer extends Thread{
                 for (int i = 0; i < servidor.threadClientes.size(); i++) {//Excluir al que envia el mensaje
                     if(servidor.threadClientes.get(i)!= this){
                         servidor.escribirMensaje(mensaje, servidor.threadClientes.get(i));
-                        System.out.println("entro");
                     }
                 }
                 break;
@@ -109,7 +115,6 @@ public class ThreadServer extends Thread{
                 salida.writeInt(6);
                 salida.writeInt(player.dadoInicio);
                 servidor.lanzamientos++;
-                System.out.println("Prueba:"+servidor.lanzamientos);
                 synchronized(this){//Convertir esto en una funcion con parametros enteros para la condicion
                     if (servidor.lanzamientos<servidor.maxplayers) {
                         wait();
