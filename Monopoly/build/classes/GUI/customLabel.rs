@@ -1,0 +1,11 @@
+GUI.GUITablero$4
+GUI.GUITablero$3
+GUI.GUITablero$2
+GUI.GUITablero$1
+GUI.customLabelCasillaVertical
+GUI.GUITablero
+GUI.customLabelCasilla
+GUI.customLabelCasillaEspecial
+GUI.customLabelCasillaHorizontal
+GUI.customLabel
+GUI.Icasas

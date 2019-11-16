@@ -86,7 +86,7 @@ public class ThreadCliente extends Thread{
                 //Arreglar los mensajes agregar nombre y hora y espacio
             case 4:
                 int dado = entrada.readInt();
-                pantalla.textCliente.setText(pantalla.textCliente.getText()+String.valueOf(dado));
+                movimientoDePieza(dado);
                 break;
             case 5:
                 pantalla.jugadoresListos();
@@ -98,6 +98,7 @@ public class ThreadCliente extends Thread{
             case 7:
                 System.out.println(entrada.readInt());
                 System.out.println("recibo pos");
+                empezado = false;
                 break;
             default:
                 System.out.println("error");
@@ -115,7 +116,7 @@ public class ThreadCliente extends Thread{
             //Condicion de cuando llegue a 39
             pantalla.tableroGrafico.pintarLabel(pantalla.tableroGrafico.siguienteEspacio(pantalla.tableroGrafico.casillas[0+i]));//Aqui va la pos actual
             try {
-                sleep(1000);
+                sleep(500);
             } catch (InterruptedException ex) {
                 Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
             }

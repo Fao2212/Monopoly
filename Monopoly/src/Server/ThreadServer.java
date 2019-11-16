@@ -56,7 +56,7 @@ public class ThreadServer extends Thread{
     }
 
     @Override
-    public void run() {
+    public void run() {//Por alguna parte de aqui un wait para esperar jugadores
         try
     	{
           // inicializa para lectura y escritura con stream de cliente
@@ -80,18 +80,19 @@ public class ThreadServer extends Thread{
                 cases(opcion);
             } catch (IOException ex) {
                 Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ThreadServer.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
     }
     
-    public void cases(int caso) throws IOException{
+    public void cases(int caso) throws IOException, InterruptedException{
         switch(caso){
             case 1:
-                salida.writeInt(4);
                 int dados =servidor.tablero.lanzarDado();
+                servidor.moverPiezaTodos(dados);
                 System.out.println(dados);
-                salida.writeInt(dados);
                 //Mover ficha
                 break;
             case 2:
@@ -109,6 +110,15 @@ public class ThreadServer extends Thread{
                 salida.writeInt(player.dadoInicio);
                 servidor.lanzamientos++;
                 System.out.println("Prueba:"+servidor.lanzamientos);
+                synchronized(this){//Convertir esto en una funcion con parametros enteros para la condicion
+                    if (servidor.lanzamientos<servidor.maxplayers) {
+                        wait();
+                    }
+                    else{
+                        servidor.releaseThreads();
+                        servidor.ordenEstablecido();
+                    }
+                }
                 break;
         }
     }

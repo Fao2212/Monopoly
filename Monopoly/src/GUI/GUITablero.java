@@ -43,13 +43,13 @@ public class GUITablero {
     public void pintarLabel(GUIFicha casilla){//Primero con el background luego con iconos
         casilla.label.setBackground(Color.red);
         casilla.setEmpty(false);
-        casilla.label.repaint();
+        //casilla.label.repaint();
     }
     
     public void despintarLabel(GUIFicha casilla){
         casilla.label.setBackground(new Color(0, 0, 0, 0));
         casilla.setEmpty(true);
-        casilla.label.repaint();
+        //casilla.label.repaint();
     }
     
     public void setearTablero(){

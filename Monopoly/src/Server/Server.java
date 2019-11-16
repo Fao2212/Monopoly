@@ -30,7 +30,7 @@ public class Server {
     int numeroDeConexiones;
     int lanzamientos;
 
-    public Server() {
+    public Server() throws InterruptedException {
         
         running = true;
         selected = true;
@@ -42,11 +42,11 @@ public class Server {
         
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         new Server();
     }
     
-    public void serverRunning(){
+    public void serverRunning() throws InterruptedException{
         
         while (selected) {   
             System.out.println("asd");
@@ -75,16 +75,12 @@ public class Server {
                 threadClientes.add(thread);
                 numeroDeConexiones++;
             }
+
             todosConectaos();
             
             lanzamientos = 0;
             
-            while (lanzamientos < maxplayers) {                
-                System.out.println(maxplayers);
-            }
-            
-            ordenEstablecido();
-            System.out.println("");
+            System.out.println("lklkl");
             //Funcion iniciar juego
             while (running) {            
             
@@ -138,6 +134,21 @@ public class Server {
                     threadClientes.get(i).salida.writeInt(i+1);
                 }
 
+            }
+        }
+    }
+    //Indicar de quien es el turno y mover la ficha correspondiente
+    public void moverPiezaTodos(int dados) throws IOException{
+        for (int i = 0; i < threadClientes.size(); i++) {
+            threadClientes.get(i).salida.writeInt(4);
+            threadClientes.get(i).salida.writeInt(dados);
+        }
+    }
+    
+    public void releaseThreads(){
+        for(ThreadServer thread: threadClientes){
+            synchronized(thread){
+                thread.notify();
             }
         }
     }
