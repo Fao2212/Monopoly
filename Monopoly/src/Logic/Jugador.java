@@ -21,7 +21,7 @@ public class Jugador {
 
     public int dadoInicio;
     public int resultado;
-    int numeroDeJugador;
+    int numeroDeJugador;//Por orden
    // public Jugador(String nombre,int numeroDeJugador){//recibe tablero
     public Tablero tablero;
     public String nombre;

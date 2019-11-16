@@ -28,15 +28,16 @@ public class Tablero {
     Jugador jugadorActual;
     int cantidadDeJugadores = 0;//Aumenta o se asigna
     int maxJugadores;
-    final static int POSICIONES_CHANCE[] = {7,22,36};
-    final static int POSICIONES_COMUNNITY[] = {2,17,33};
-    final static int POSICIONES_FERROCARRILES[] = {5,15,25,35};
-    final static int POSICIONES_SERVICIOS[] = {12,28};
-    final static int VISITANDO_CARCEL = 10;
-    final static int IMPUESTOS[] = {4,38};
-    final static int FREE_PARK = 20;
-    final static int CARCEL = 30;
-    final static int GO = 0;
+    public final static int POSICIONES_CHANCE[] = {7,22,36};
+    public final static int POSICIONES_COMUNNITY[] = {2,17,33};
+    public final static int POSICIONES_FERROCARRILES[] = {5,15,25,35};
+    public final static int POSICIONES_SERVICIOS[] = {12,28};
+    public final static int VISITANDO_CARCEL = 10;
+    public final static int IMPUESTOS[] = {4,38};
+    public final static int POSICIONESESPECIALES[] = {0,10,20,30};
+    public final static int FREE_PARK = 20;
+    public final static int CARCEL = 30;
+    public final static int GO = 0;
     //contadores para los decks
     
 
@@ -49,6 +50,7 @@ public class Tablero {
         hoteles = new Edificio[12];
         propiedades = new Propiedad[22];
        dadosInicio(); 
+       
         
     }
 
@@ -71,6 +73,7 @@ public class Tablero {
     
     public void agregarJugador(Jugador jugador){
         jugadores[cantidadDeJugadores++] = jugador;
+        asignarPosJugador(jugador);
     }
     
     public void asignarCasillas(){

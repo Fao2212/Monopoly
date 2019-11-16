@@ -59,7 +59,7 @@ public class Cliente {//Solamente pinta la pantalla
         });
     }
          
-    public void conexion(){//Enviar la pos de la ficha y agregar jugador relacion y asignar numero y posicion
+    public void conexion(){
       try {
           
          socket = new Socket("localhost", 35557);

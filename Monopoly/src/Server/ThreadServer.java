@@ -68,12 +68,14 @@ public class ThreadServer extends Thread{
           servidor.tablero.agregarJugador(player);
     	}
     	catch (IOException e) {  e.printStackTrace();     }
-        
+        //Un ciclo mas para escoger el orden
         int opcion;
+        
         while (running) {        
             try {
                 System.out.println("esperando");
                 opcion = entrada.readInt();
+                System.out.println(opcion);
                 System.out.println("enviado");
                 cases(opcion);
             } catch (IOException ex) {
@@ -101,6 +103,12 @@ public class ThreadServer extends Thread{
                         System.out.println("entro");
                     }
                 }
+                break;
+            case 3://Enviar todos los que haya todas las veces luego hacer el orden
+                salida.writeInt(6);
+                salida.writeInt(player.dadoInicio);
+                servidor.lanzamientos++;
+                System.out.println("Prueba:"+servidor.lanzamientos);
                 break;
         }
     }

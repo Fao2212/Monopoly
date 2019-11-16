@@ -5,6 +5,7 @@
  */
 package Server;
 
+import GUI.GUITablero;
 import GUI.formPantallaClientePrueba;
 import GUI.formTablero;
 import Logic.Jugador;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import GUI.customLabel;
 
 /**
  *
@@ -41,15 +43,11 @@ public class ThreadCliente extends Thread{
     public void run() {
         int opcion;
         
-        /*while(running){
-            if(empezado==false)
-                break;
-        }*/
-        
         while (running) {        
             try {
                 System.out.println("antes");
                 opcion = entrada.readInt();
+                System.out.println(opcion);
                 System.out.println("despues");
                 cases(opcion);
             } catch (IOException ex) {
@@ -60,9 +58,16 @@ public class ThreadCliente extends Thread{
         
     }
     
+    
     public void cases(int caso) throws IOException{//Implementar aca todos los mensajes en conjunto con el del servidor
         switch(caso){
             case 1:
+                if(empezado){//Escogiendo orden 
+                    salida.writeInt(3);
+                    //Se tiene que bloquear el boton a que solo se pueda tocar una vez
+                    //empezado = false; bloquear cuando todos esten el servidor envia a desbloquear los demas botones
+                    break;
+                }   
                 salida.writeInt(1);
                 break;
             case 2:
@@ -84,10 +89,39 @@ public class ThreadCliente extends Thread{
                 pantalla.textCliente.setText(pantalla.textCliente.getText()+String.valueOf(dado));
                 break;
             case 5:
+                pantalla.jugadoresListos();
+                break;
+            case 6:
+                entrada.readInt();//Recibe el numero que le toco para el orden
+                System.out.println("recibo numero");
+                break;
+            case 7:
+                System.out.println(entrada.readInt());
+                System.out.println("recibo pos");
                 break;
             default:
                 System.out.println("error");
         }
+        
+        
+        
     }
     
+    public void movimientoDePieza(int espacios){//Tiene que pintarse en TODOS los tableros LLAMADO DESDE EL SERVIDOR PARA TODOS LOS USUARIOS
+        //Pedir posActual al servidor Condiciones de si esta en la carcel etc
+        for (int i = 0; i <= espacios; i++) {//Actualizar Tablero logico . Deberia pedir la pieza tambien?
+            //Siguiente espacio
+            //pos y sumarle el i
+            //Condicion de cuando llegue a 39
+            pantalla.tableroGrafico.pintarLabel(pantalla.tableroGrafico.siguienteEspacio(pantalla.tableroGrafico.casillas[0+i]));//Aqui va la pos actual
+            try {
+                sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(i != espacios)
+                pantalla.tableroGrafico.despintarLabel(pantalla.tableroGrafico.siguienteEspacio(pantalla.tableroGrafico.casillas[0+i]));
+        }
+    
+    }
 }

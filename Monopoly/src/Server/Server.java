@@ -27,6 +27,8 @@ public class Server {
     int maxplayers;
     Tablero tablero;//Asociar jugador-cliente
     boolean selected;
+    int numeroDeConexiones;
+    int lanzamientos;
 
     public Server() {
         
@@ -60,20 +62,30 @@ public class Server {
 
             System.out.println ("Esperando cliente ... ");
 
-            int i = 0;
+            numeroDeConexiones = 0;
 
-            while(i<maxplayers){//Cambiar por la cantidad de jugadores con que se inicia el serbvidor
+            while(numeroDeConexiones<maxplayers){//Cambiar por la cantidad de jugadores con que se inicia el serbvidor
                 
-                clientes[i] = socket.accept();
+                clientes[numeroDeConexiones] = socket.accept();
                 System.out.println ("Conectado con cliente de " + 
-                clientes[i].getInetAddress()+":"+
-                clientes[i].getPort());
-                ThreadServer thread = new ThreadServer(clientes[i],this,i);
+                clientes[numeroDeConexiones].getInetAddress()+":"+
+                clientes[numeroDeConexiones].getPort());
+                ThreadServer thread = new ThreadServer(clientes[numeroDeConexiones],this,numeroDeConexiones);
                 thread.start();
                 threadClientes.add(thread);
-                i++;
+                numeroDeConexiones++;
+            }
+            todosConectaos();
+            
+            lanzamientos = 0;
+            
+            while (lanzamientos < maxplayers) {                
+                System.out.println(maxplayers);
             }
             
+            ordenEstablecido();
+            System.out.println("");
+            //Funcion iniciar juego
             while (running) {            
             
             }
@@ -110,4 +122,23 @@ public class Server {
         selected = false;
     }
     
+    public void todosConectaos() throws IOException{
+        for (int i = 0; i < threadClientes.size(); i++) {
+            threadClientes.get(i).salida.writeInt(5);
+        }
+    }
+    
+    public void ordenEstablecido() throws IOException{//Se repite
+        tablero.ordenarJugadores();
+        for (int j = 0; j < threadClientes.size(); j++) {
+            for (int i = 0; i < threadClientes.size(); i++) {
+                if(threadClientes.get(i).player == tablero.jugadores[i]){
+                    System.out.println(i);
+                    threadClientes.get(i).salida.writeInt(7);
+                    threadClientes.get(i).salida.writeInt(i+1);
+                }
+
+            }
+        }
+    }
 }
