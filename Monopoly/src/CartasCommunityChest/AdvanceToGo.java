@@ -23,6 +23,12 @@ public class AdvanceToGo extends Cartas{
     //suma 200
     @Override
     public void Action(Jugador jugador){
+        while (jugador.pos != 0){
+            jugador.siguienteCasilla();
+            if (jugador.casilla.tipo == 3 && jugador.casilla.doAction().propietario != null){                                             //o el numero de propiedad
+                jugador.pagarAlquiler(jugador.casilla.doAction());
+            }
+        }
         jugador.dinero = jugador.dinero + 200;
     }
 }

@@ -17,13 +17,13 @@ public class FromSaleOfStock extends Cartas{
 
     public FromSaleOfStock() {
         this.tipo = CommunityChest;
-        this.info = "From sale of stock you get $50";
+        this.info = "From sale of stock you get $45";
     }
     
     //suma 50
     @Override
     public void Action(Jugador jugador){
-        jugador.dinero = jugador.dinero + 50;
+        jugador.dinero = jugador.dinero + 45;
     }
     
 }

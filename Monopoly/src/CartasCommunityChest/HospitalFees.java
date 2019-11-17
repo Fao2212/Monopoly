@@ -17,15 +17,15 @@ public class HospitalFees extends Cartas{
 
     public HospitalFees() {
         this.tipo = CommunityChest;
-        this.info = "Hospital Fees" + "\n" +
-                "Pay $50";
+        this.info = "Pay hospital" + "\n" +
+                "Pay $100";
     }
     
     
     //resta 50
     @Override
     public void Action(Jugador jugador){
-        jugador.dinero = jugador.dinero - 50;
+        jugador.dinero = jugador.dinero - 100;
     }
     
 }

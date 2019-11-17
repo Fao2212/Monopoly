@@ -17,15 +17,15 @@ public class SchoolFees extends Cartas{
 
     public SchoolFees() {
         this.tipo = CommunityChest;
-        this.info = "School fees" + "\n" +
-                "Pay $50";
+        this.info = "Pay school tax" + "\n" +
+                "Pay $150";
     }
     
     
     //resta 50
     @Override
     public void Action(Jugador jugador){
-        jugador.dinero = jugador.dinero - 50;
+        jugador.dinero = jugador.dinero - 150;
     }
     
 }
