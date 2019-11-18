@@ -22,8 +22,8 @@ public abstract class customLabel {
     int numeroDeCasilla;
     int dimensionx;
     int dimensiony;
-    GUIFicha fichas[][];
-    GUIEdificio edificios[];
+    public GUIFicha fichas[][];
+    public GUIEdificio edificios[];
     public abstract void rotar();
     JLabel label;
     public void addFichaGrid(int pox,int poy){

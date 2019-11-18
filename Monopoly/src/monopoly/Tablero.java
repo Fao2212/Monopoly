@@ -8,6 +8,7 @@ package monopoly;
 import Logic.Cartas;
 import Logic.Jugador;
 import Random.CustomRandom;
+import java.awt.Color;
 
 /**
  *
@@ -22,6 +23,7 @@ public class Tablero {
     Cartas arcaComunal[];
     Cartas casualidad[];
     public Jugador jugadores[];
+    public Color colores[] = {Color.red,Color.blue,Color.orange,Color.green,Color.CYAN,Color.yellow,Color.red};
     int indiceJugadorActual;
     Integer dadosInicio[];
     int contRepPos;
@@ -53,6 +55,12 @@ public class Tablero {
        
         
     }
+    
+    
+    public void asignarUnColorAlJugadorPrueba(Jugador jugador){
+        jugador.colorPrueba = colores[jugador.numeroDeJugador];
+        System.out.println(jugador.colorPrueba);
+    }
 
     public void setMaxJugadores(int maxJugadores) {
         this.maxJugadores = maxJugadores;
@@ -68,12 +76,15 @@ public class Tablero {
     }
     
     public void asignarPosJugador(Jugador jugador) {//Se asigna en la conexion y cuando cada uno le de tirar dados muestra el numero que tienen asignado y se muestra el acomodo de las posiciones
-        jugador.dadoInicio = dadosInicio[contRepPos++];
+        jugador.dadoInicio = dadosInicio[contRepPos++];//Se tiene que mandar su numero
+        System.out.println(jugador.numeroDeJugador);
     }
     
     public void agregarJugador(Jugador jugador){
         jugadores[cantidadDeJugadores++] = jugador;
+        jugador.numeroDeJugador = cantidadDeJugadores-1;//Esto es temporal, en el momento de el juego se hace despues de ordenarlos
         asignarPosJugador(jugador);
+        asignarUnColorAlJugadorPrueba(jugador);
     }
     
     public void asignarCasillas(){
@@ -92,11 +103,17 @@ public class Tablero {
                 }
             }
         }
-
+        for(int k = 0;i<jugadores.length;i++){
+            jugadores[k].numeroDeJugador = k+1;
+        }
     }
     
     public void iniciarJuego(){
-        
+        setPrimerJugador();
+    }
+    
+    public void setPrimerJugador(){
+        jugadores[0].setTurno(true);
     }
     
     public void siguienteJugador(){
@@ -196,7 +213,7 @@ public class Tablero {
     }
     
     public int lanzarDado(){
-        int dado = CustomRandom.randomRange(1, 6);
+        int dado = CustomRandom.randomRange(1, 7);
         return dado;
     }
     
@@ -221,5 +238,7 @@ public class Tablero {
             System.out.println(jugadores[i].nombre);
         }
     }
+    
+    
 
 }

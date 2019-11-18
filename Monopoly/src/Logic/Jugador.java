@@ -5,6 +5,7 @@
  */
 package Logic;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 import monopoly.Casilla;
@@ -16,12 +17,13 @@ import monopoly.Tablero;
  * @author migue
  */
 public class Jugador {
+    
+    public Color colorPrueba;
     public int dinero;
     public boolean turno;
-
     public int dadoInicio;
     public int resultado;
-    int numeroDeJugador;//Por orden
+    public int numeroDeJugador;//Por orden
    // public Jugador(String nombre,int numeroDeJugador){//recibe tablero
     public Tablero tablero;
     public String nombre;
@@ -31,6 +33,8 @@ public class Jugador {
     public Casilla casilla;
     public int pos;
     public boolean carcel;
+   
+    
     public Jugador(String nombre, Tablero t){
         this.nombre = nombre;
         this.turno = false;
@@ -43,6 +47,14 @@ public class Jugador {
         this.casilla = tablero.casillas[0];
         this.pos = 0;
         this.carcel = false;
+    }
+
+    public boolean isTurno() {
+        return turno;
+    }
+
+    public void setTurno(boolean turno) {
+        this.turno = turno;
     }
     
     public int lanzarDado(){                                //como es 1 dado, si al lanzar el segundo le da al doble del resultado, lanza otros 2
@@ -82,7 +94,7 @@ public class Jugador {
     
     //no se si se setea la imagen
     public void siguienteCasilla(){
-        if (pos == 39) pos = -1;
+        if (pos == 39) pos = -1;//Pasar a 0
         this.pos++;
         this.casilla = tablero.casillas[pos];
     }
@@ -93,7 +105,7 @@ public class Jugador {
     }
 
     public void setPos(int pos) {
-        this.pos = pos;
+        this.pos += pos;
         this.casilla = tablero.casillas[this.pos];
     }
     

@@ -10,7 +10,5 @@ package Server;
  * @author ferol
  */
 public class Message {
-    //Metodo statico con un switch para grupo de acciones o enviar objetos 
-    
-    //Crea paquetes para enviar por los sockets como objeto que extienden de mensaje
+    //Dato de clientes
 }

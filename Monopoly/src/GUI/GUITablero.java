@@ -19,6 +19,7 @@ public class GUITablero {
     public customLabel[] casillas;
     JLabel tablero;
     int posx,posy;
+    public Color colores[] = {Color.red,Color.blue,Color.orange,Color.green,Color.CYAN,Color.yellow,Color.red};
     int xpos1;
     int ypos1;
 
@@ -29,8 +30,8 @@ public class GUITablero {
     }
     
     public GUIFicha siguienteEspacio(customLabel casilla){//Metodo del ERROR
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 2; j++) {
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 3; j++) {
                 if (casilla.fichas[i][j].isEmpty()) {
                     GUIFicha label =casilla.fichas[i][j];
                     return label;
@@ -40,18 +41,21 @@ public class GUITablero {
         return null;
     }
     
-    public void pintarLabel(GUIFicha casilla){//Primero con el background luego con iconos
-        System.out.println("pinto");
-        casilla.label.setBackground(Color.red);
+    public void setFichasGo(){
+        //Por la cantidad de jugaores 
+    }
+    
+    public void pintarLabel(GUIFicha casilla,int num){//Primero con el background luego con iconos
+        casilla.label.setBackground(colores[num]);
+        casilla.label.setOpaque(true);
         casilla.setEmpty(false);
-        //casilla.label.repaint();
     }
     
     public void despintarLabel(GUIFicha casilla){
-        System.out.println("despinto");
+        casilla.label.setOpaque(false);
         casilla.label.setBackground(new Color(0, 0, 0, 0));
+        tablero.repaint();
         casilla.setEmpty(true);
-        //casilla.label.repaint();
     }
     
     public void setearTablero(){

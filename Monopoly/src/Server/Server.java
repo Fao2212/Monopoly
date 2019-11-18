@@ -6,6 +6,7 @@
 package Server;
 
 import GUI.formPantallaServidorPrueba;
+import Logic.Jugador;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -64,23 +65,32 @@ public class Server {
 
             numeroDeConexiones = 0;
 
-            while(numeroDeConexiones<maxplayers){//Cambiar por la cantidad de jugadores con que se inicia el serbvidor
+            while(running/*numeroDeConexiones<maxplayers*/){
                 
                 clientes[numeroDeConexiones] = socket.accept();
                 System.out.println ("Conectado con cliente de " + 
                 clientes[numeroDeConexiones].getInetAddress()+":"+
                 clientes[numeroDeConexiones].getPort());
                 ThreadServer thread = new ThreadServer(clientes[numeroDeConexiones],this,numeroDeConexiones);
-                thread.start();
-                threadClientes.add(thread);
                 numeroDeConexiones++;
+                threadClientes.add(thread);//Esto se agrega muy tarde
+                thread.start();
+                System.out.println("Conexiones:"+numeroDeConexiones);
+                if (numeroDeConexiones == maxplayers) {
+                    break;
+                }
             }
-
-            todosConectaos();
+            //wait aca
+            //todosConectaos();
             
             lanzamientos = 0;
+            System.out.println("s");
+            ordenEstablecido();//Esto se hace cuando se escoje el orden
+            System.out.println("ss");
+            tablero.iniciarJuego();//Esto va despues del orden
+            System.out.println("sss");
+            todosEnGo();
             
-            //Funcion iniciar juego asignar el turno false o true y poner las fichas en el go
             while (running) {            
             
             }
@@ -108,6 +118,7 @@ public class Server {
     public void imprimirJugadores(){
         for (int i = 0; i < threadClientes.size(); i++) {
             System.out.println(threadClientes.get(i).getPlayer().nombre);
+            System.out.println(threadClientes.get(i).getPlayer().numeroDeJugador);
         }
     }
     
@@ -124,23 +135,26 @@ public class Server {
     }
     
     public void ordenEstablecido() throws IOException{//Se repite
-        tablero.ordenarJugadores();
+        //tablero.ordenarJugadores();
         for (int j = 0; j < threadClientes.size(); j++) {
             for (int i = 0; i < threadClientes.size(); i++) {
                 if(threadClientes.get(i).player == tablero.jugadores[i]){
                     System.out.println(i);
                     threadClientes.get(i).salida.writeInt(7);
-                    threadClientes.get(i).salida.writeInt(i+1);
+                    threadClientes.get(i).salida.writeInt(i);
+                    threadClientes.get(i).salida.writeInt(maxplayers);
                 }
 
             }
         }
     }
     //Indicar de quien es el turno y mover la ficha correspondiente
-    public void moverPiezaTodos(int dados) throws IOException{
+    public void moverPiezaTodos(int dados,int jugadore,int posi) throws IOException{
         for (int i = 0; i < threadClientes.size(); i++) {
             threadClientes.get(i).salida.writeInt(4);
             threadClientes.get(i).salida.writeInt(dados);
+            threadClientes.get(i).salida.writeInt(jugadore);
+            threadClientes.get(i).salida.writeInt(posi);
         }
     }
     
@@ -149,6 +163,12 @@ public class Server {
             synchronized(thread){
                 thread.notify();
             }
+        }
+    }
+    
+    public void todosEnGo() throws IOException{
+        for(ThreadServer thread: threadClientes){
+            thread.salida.writeInt(8);
         }
     }
 }

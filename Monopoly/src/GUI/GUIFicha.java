@@ -13,8 +13,8 @@ import javax.swing.JLabel;
  *
  * @author ferol
  */
-class GUIFicha {
-    JLabel label;
+public class GUIFicha {
+    public JLabel label;
     boolean empty;
 
     public GUIFicha() {

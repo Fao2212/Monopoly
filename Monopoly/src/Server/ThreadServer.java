@@ -45,8 +45,6 @@ public class ThreadServer extends Thread{
         this.player = player;
     }
     
-    
-
     public String getNameUser() {
         return nameUser;
     }
@@ -69,11 +67,14 @@ public class ThreadServer extends Thread{
     	catch (IOException e) {  e.printStackTrace();     }
         synchronized(this){
             try {
-                if(servidor.numeroDeConexiones < servidor.maxplayers)
-                    wait();
-                else{
-                    System.out.println("lubresoy");
+                if(servidor.maxplayers == servidor.numeroDeConexiones){
                     servidor.releaseThreads();
+                }
+                else{
+                    System.out.println("durmiendo");
+                    wait();
+                    System.out.println("despierto");
+                
                 }
             } catch (InterruptedException ex) {
                 Logger.getLogger(ThreadServer.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,11 +96,12 @@ public class ThreadServer extends Thread{
         }
     }
     
-    public void cases(int caso) throws IOException, InterruptedException{
+    public void cases(int caso) throws IOException, InterruptedException{//Enviar QUien hace cada accion
         switch(caso){
             case 1:
                 int dados =servidor.tablero.lanzarDado();
-                servidor.moverPiezaTodos(dados);
+                servidor.moverPiezaTodos(dados,numeroDeJugador,player.pos);
+                player.setPos(dados);
                 System.out.println(dados);
                 break;
             case 2:
@@ -127,4 +129,11 @@ public class ThreadServer extends Thread{
                 break;
         }
     }
+    
+    public void enviarInfoCliente(){
+        //Enviar un caso con el numeroDeJugador
+        //Recibir caso con  esta funcion
+    }
+    
+   
 }

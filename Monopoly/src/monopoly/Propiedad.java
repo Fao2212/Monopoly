@@ -22,7 +22,7 @@ public abstract class Propiedad {//Preguntar la mejor manera de ver si es hipote
     /*enum+calle a la que pertenece + color*/int grupoDeColor;
     int valorDeHipoteca;
     ImageIcon imagen;
-    int tipo;//Segun se instancie se le asigna su tipo
+    int tipo;
     boolean hipotecada;
     
     public abstract void aumentarAlquiler();
@@ -57,88 +57,4 @@ public abstract class Propiedad {//Preguntar la mejor manera de ver si es hipote
     
 }
 
-class TituloDePropiedad extends Propiedad{
 
-    int cantidadDeCasas;
-    Edificio casas[];
-    Edificio hotel;
-    boolean hayHotel;
-    
-    @Override
-    public void aumentarAlquiler() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public void comprarCasas(int cantidad){
-        
-    }
-    
-    public void comprarHotel(){
-        //if cantidad de casas == 4;
-    }
-
-    @Override
-    public void cobrarAlquiler() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int doActionCasas() {
-        return cantidadDeCasas;
-    }
-
-    @Override
-    public int doActionHotel() {
-        if (hayHotel) return 1;
-        return 0;
-    }
-    
-}
-
-class Ferrocarril extends Propiedad{
-
-    @Override
-    public void aumentarAlquiler() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void cobrarAlquiler() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int doActionCasas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int doActionHotel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-}
-
-class Servicio extends Propiedad{
-
-    @Override
-    public void aumentarAlquiler() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void cobrarAlquiler() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int doActionCasas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int doActionHotel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-}
