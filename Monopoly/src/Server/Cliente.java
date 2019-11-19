@@ -67,6 +67,7 @@ public class Cliente {//Solamente pinta la pantalla
          salida = new DataOutputStream(socket.getOutputStream());
          nombre = JOptionPane.showInputDialog("Introducir Nick :");
          pantallaTablero.setTitle(nombre);
+         pantallaTablero.labelNombre.setText(nombre);
          salida.writeUTF(nombre);
          System.out.println("1. Envia el nombre del cliente: "+nombre);
          

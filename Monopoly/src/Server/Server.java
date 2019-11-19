@@ -80,16 +80,8 @@ public class Server {
                     break;
                 }
             }
-            //wait aca
+
             //todosConectaos();
-            
-            lanzamientos = 0;
-            System.out.println("s");
-            ordenEstablecido();//Esto se hace cuando se escoje el orden
-            System.out.println("ss");
-            tablero.iniciarJuego();//Esto va despues del orden
-            System.out.println("sss");
-            todosEnGo();
             
             while (running) {            
             
@@ -167,8 +159,17 @@ public class Server {
     }
     
     public void todosEnGo() throws IOException{
+        tablero.iniciarJuego();
+        for(Jugador juga: tablero.jugadores){
+            System.out.println(juga);
+        }
         for(ThreadServer thread: threadClientes){
             thread.salida.writeInt(8);
+        }
+    }
+    public void enviarDatosATodos() throws IOException{
+        for (ThreadServer cliente : threadClientes) {
+            cliente.enviarInfoCliente();
         }
     }
 }

@@ -33,6 +33,8 @@ public class ThreadCliente extends Thread{
     formTablero pantalla;//Este seria el juego con el tablero PINTA SU PROPIO JUEGO
     boolean running;
     boolean empezado;
+    public boolean tirarDados;
+    public boolean turno;
     public Color colores[] = {Color.red,Color.blue,Color.orange,Color.green,Color.CYAN,Color.yellow,Color.red};
     int numeroDeJugador;
     int maxPlayers;
@@ -47,6 +49,7 @@ public class ThreadCliente extends Thread{
         this.salida = salida;
         this.empezado = true;
         this.tirosInicio = 0;
+        this.tirarDados = true;
     }
     
     @Override
@@ -62,6 +65,8 @@ public class ThreadCliente extends Thread{
                 cases(opcion);
             } catch (IOException ex) {
                 Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -69,7 +74,7 @@ public class ThreadCliente extends Thread{
     }
     
     
-    public void cases(int caso) throws IOException{//Implementar aca todos los mensajes en conjunto con el del servidor
+    public void cases(int caso) throws IOException, InterruptedException{//Implementar aca todos los mensajes en conjunto con el del servidor
         switch(caso){
             case 1:
                 /*if(empezado){//Escogiendo orden 
@@ -78,7 +83,19 @@ public class ThreadCliente extends Thread{
                     //empezado = false; bloquear cuando todos esten el servidor envia a desbloquear los demas botones
                     break;
                 }   */
-                salida.writeInt(1);
+                System.out.println("pido turno");
+                miTurno();
+                System.out.println("recibo turno");
+                if(turno){
+                    if (tirarDados) {
+                        salida.writeInt(1);
+                        tirarDados = false;
+                    }
+                    else
+                        System.out.println("Dados Lanzados");
+                }
+                else
+                    System.out.println("No es mi turno");
                 break;
             case 2:
                 System.out.println("Mensaje a recibir");
@@ -118,6 +135,12 @@ public class ThreadCliente extends Thread{
                 break;
             case 8:
                 ponerPiezaEnGo();
+                break;
+            case 9:
+                leerTurno();
+                break;
+            case 10:
+                pasarTurno();
                 break;
             default:
                 System.out.println("error");
@@ -202,16 +225,39 @@ public class ThreadCliente extends Thread{
         }
     }
     
-    public void setClienteInfo(){
-        //Nombre dinero propiedades en 0 
+    public void setClienteInfo() throws IOException{//Podria enviar todo el player
+        this.turno = entrada.readBoolean();//Turno
+        pantalla.labelDinero.setText(String.valueOf(entrada.readInt()));//Dinero
+        pantalla.labelTurno.setText(entrada.readUTF());//Nombre del jugador del turno actual
+        //Propiedades
+        //Casas
     }
     public void actualizarClienteInfo(){
         //actualiza propiedades posiciones
     }
     
-   /* public boolean miTurno(){
-        
-    }*/
+    public void miTurno() throws IOException, InterruptedException{
+        salida.writeInt(5);
+        synchronized(this){
+            wait();
+        }
+    }
+    
+    public void leerTurno() throws IOException{
+        System.out.println("Entre");
+        this.turno = entrada.readBoolean();
+        synchronized(this){
+            notify();//Cuando recibe libera
+        }
+    }
+    
+    public void pasarTurno() throws IOException{
+        turno = false;
+        tirarDados = true;
+        System.out.println("Intento pasar");
+        salida.writeInt(4);
+        System.out.println("Paso");
+    }
 }
     
 

@@ -81,10 +81,13 @@ public class Tablero {
     }
     
     public void agregarJugador(Jugador jugador){
+        System.out.println("cantidadDeJugadores"+cantidadDeJugadores);
         jugadores[cantidadDeJugadores++] = jugador;
+        System.out.println("cantidadDeJugadores2 "+cantidadDeJugadores);
         jugador.numeroDeJugador = cantidadDeJugadores-1;//Esto es temporal, en el momento de el juego se hace despues de ordenarlos
         asignarPosJugador(jugador);
         asignarUnColorAlJugadorPrueba(jugador);
+        System.out.println(jugadores[1]);
     }
     
     public void asignarCasillas(){
@@ -118,19 +121,20 @@ public class Tablero {
     
     public void siguienteJugador(){
         
-        jugadorActual = jugadores[indiceJugadorActual];
-        if(indiceJugadorActual < jugadores.length)
-            indiceJugadorActual++;
-        else
+        jugadores[indiceJugadorActual].setTurno(false);
+        indiceJugadorActual++;
+        System.out.println("CantidadDe Jugadores"+cantidadDeJugadores);
+        System.out.println("IndiceJugador"+indiceJugadorActual);
+        if (indiceJugadorActual == cantidadDeJugadores) {
             indiceJugadorActual = 0;
+        }
+        jugadores[indiceJugadorActual].setTurno(true);
         
     }
     
-   /* public void preOrden(ArrayList<Jugador> arraylist){//Funcion que compruebe
-        
-        
-        
-    }*/
+    public void setJugadorActual(){
+        jugadorActual = jugadores[indiceJugadorActual];
+    }
     
     public int mayor(int[] array){
         int mayor = -1;
@@ -185,13 +189,6 @@ public class Tablero {
 
     }*/
     
-    public void moverPieza(int espacios){
-        //Jugador.pieza.pos = pos+espacios;
-        for (int i = 0; i < espacios; i++) {
-            //Jugador.ficha.pos = pos+espacios;
-        }
-    }
-    
     public void venderPropiedad(Propiedad propiedad,Jugador jugador){
         //Banco.comprarPropiedad();
     }
@@ -217,7 +214,7 @@ public class Tablero {
         return dado;
     }
     
-    public int lanzarDados(){
+    public int lanzarDados(){//Manejar cuando se repiten
         return lanzarDado()+lanzarDado();
     }
     

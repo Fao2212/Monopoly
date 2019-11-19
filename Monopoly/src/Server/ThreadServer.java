@@ -67,7 +67,10 @@ public class ThreadServer extends Thread{
     	catch (IOException e) {  e.printStackTrace();     }
         synchronized(this){
             try {
-                if(servidor.maxplayers == servidor.numeroDeConexiones){
+                if(servidor.maxplayers == servidor.numeroDeConexiones){//Hacer aca todo lo que pasa cuando se conecta el ultimo cliente
+                    servidor.ordenEstablecido();
+                    servidor.tablero.iniciarJuego();
+                    servidor.todosEnGo();
                     servidor.releaseThreads();
                 }
                 else{
@@ -77,6 +80,8 @@ public class ThreadServer extends Thread{
                 
                 }
             } catch (InterruptedException ex) {
+                Logger.getLogger(ThreadServer.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
                 Logger.getLogger(ThreadServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -128,13 +133,31 @@ public class ThreadServer extends Thread{
                     }
                 }
                 break;
+            case 4:
+                System.out.println("Llego a a pasar");
+                servidor.tablero.siguienteJugador();
+                break;
+            case 5:
+                miTurno();
+                break;
         }
     }
     
-    public void enviarInfoCliente(){
-        //Enviar un caso con el numeroDeJugador
-        //Recibir caso con  esta funcion
+    public void enviarInfoCliente() throws IOException{
+        Jugador jugadohdelturno = null;
+        salida.writeBoolean(jugadohdelturno.turno);
+        salida.writeInt(player.dinero);
+        salida.writeUTF(jugadohdelturno.nombre);
+    }
+    public void actualizarInfoCliente(){//Lo mismo pero con una llamada a cases
+        
     }
     
+    public void miTurno() throws IOException{
+        System.out.println("Envio"+player+player.turno);
+        salida.writeInt(9);
+        salida.writeBoolean(player.turno);
+        System.out.println("Enviado");
+    }
    
 }

@@ -97,6 +97,8 @@ public class formPantallaClientePrueba extends javax.swing.JFrame {
             thread.cases(1);
         } catch (IOException ex) {
             Logger.getLogger(formPantallaClientePrueba.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(formPantallaClientePrueba.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_butonDadosActionPerformed
 
@@ -104,6 +106,8 @@ public class formPantallaClientePrueba extends javax.swing.JFrame {
         try {
             thread.cases(3);
         } catch (IOException ex) {
+            Logger.getLogger(formPantallaClientePrueba.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
             Logger.getLogger(formPantallaClientePrueba.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
