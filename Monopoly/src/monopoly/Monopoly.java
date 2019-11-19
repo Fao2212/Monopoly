@@ -7,6 +7,7 @@ package monopoly;
 
 import CartasChance.AdvanceToGo;
 import Logic.Cartas;
+import Logic.FactoryPropiedades;
 
 
 /**
@@ -19,7 +20,7 @@ public class Monopoly {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Tablero tablero = new Tablero();
+        FactoryPropiedades.guardarRespaldo(FactoryPropiedades.cargarPropiedades());
     }
     
 }

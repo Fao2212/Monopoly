@@ -6,13 +6,14 @@
 package monopoly;
 
 import Logic.Jugador;
+import java.io.Serializable;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author ferol
  */
-public abstract class Propiedad {//Preguntar la mejor manera de ver si es hipotecable
+public abstract class Propiedad implements Serializable{//Preguntar la mejor manera de ver si es hipotecable
     
     String nombre;//Calle 
     int precio;
@@ -20,10 +21,24 @@ public abstract class Propiedad {//Preguntar la mejor manera de ver si es hipote
     public Jugador propietario = null;
     //enum Clasificacion
     /*enum+calle a la que pertenece + color*/int grupoDeColor;
+    int lugarEnElTablero;
     int valorDeHipoteca;
     ImageIcon imagen;
     int tipo;
     boolean hipotecada;
+
+    public Propiedad(String nombre, int precio, int alquiler, int grupoDeColor, int valorDeHipoteca, int tipo,int lugarEnElTablero) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.alquiler = alquiler;
+        this.grupoDeColor = grupoDeColor;
+        this.valorDeHipoteca = valorDeHipoteca;
+        this.tipo = tipo;
+        this.hipotecada = false;
+        this.lugarEnElTablero = lugarEnElTablero;
+    }
+    
+    
     
     public abstract void aumentarAlquiler();
     public abstract void cobrarAlquiler();

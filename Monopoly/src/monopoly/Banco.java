@@ -57,5 +57,7 @@ public class Banco {
        //Da la opcion de que todos voten o pasen
        //La consigue el que pague mas
    }
-   
+   public static void ofrecerPropiedad(){
+       
+   }
 }
