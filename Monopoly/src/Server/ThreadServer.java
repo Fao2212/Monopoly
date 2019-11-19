@@ -101,6 +101,7 @@ public class ThreadServer extends Thread{
             case 1:
                 int dados =servidor.tablero.lanzarDado();
                 servidor.moverPiezaTodos(dados,numeroDeJugador,player.pos);
+                System.out.println("pos"+player.pos);
                 player.setPos(dados);
                 System.out.println(dados);
                 break;

@@ -37,6 +37,7 @@ public class ThreadCliente extends Thread{
     int numeroDeJugador;
     int maxPlayers;
     GUIFicha lastTile;
+    int tirosInicio;
 
     public ThreadCliente(DataInputStream entrada, DataOutputStream salida, formTablero pantalla) {
         this.running = true;
@@ -45,6 +46,7 @@ public class ThreadCliente extends Thread{
         this.entrada = entrada;
         this.salida = salida;
         this.empezado = true;
+        this.tirosInicio = 0;
     }
     
     @Override
@@ -97,6 +99,7 @@ public class ThreadCliente extends Thread{
                 int jug = entrada.readInt();
                 int posi = entrada.readInt();
                 System.out.println("TiroDeDado"+dado);
+                System.out.println("Posi"+posi);
                 movimientoDePieza(dado,jug,posi);
                 break;
             case 5:
@@ -123,35 +126,69 @@ public class ThreadCliente extends Thread{
         
         
     }
-    
-    public void movimientoDePieza(int espacios,int piezaJugador,int posActual){//Ver en que posicion de la matruz esta
-        //Al salir del go buscar la pieza del que tira el dado y borrarla de entre todas las disponibles
-        if(posActual == 0){
+    //Enemiga propia
+    public void movimientoDePieza(int espacios,int piezaJugador,int posActual){
+        
+        int movimiento = espacios;
+        int nuevaPos = posActual + espacios;
+        
+        if(nuevaPos > 39){
+            nuevaPos = nuevaPos - 40;
+        }
+        
+        if(tirosInicio<maxPlayers){
+        //Movimiento Inicial bugeado
             for (int i = 0; i < 2; i++) {
                 for (int j = 0; j < 3; j++) {
-                    if(pantalla.tableroGrafico.casillas[0].fichas[i][j].label.getBackground()==colores[i])
+                    if(pantalla.tableroGrafico.casillas[0].fichas[i][j].label.getBackground()==colores[piezaJugador]){
                         pantalla.tableroGrafico.despintarLabel(pantalla.tableroGrafico.casillas[0].fichas[i][j]);
+                        tirosInicio++;
+                    }
                 }
             }
-        }
-        else
-            pantalla.tableroGrafico.despintarLabel(lastTile);
-        for (int i = posActual; i <= posActual+espacios; i++) {//Actualizar tablero logico 
-            if(i == 40)
-                i = 0;
-            GUIFicha tile = pantalla.tableroGrafico.siguienteEspacio(pantalla.tableroGrafico.casillas[i]);
-            pantalla.tableroGrafico.pintarLabel(tile,piezaJugador);//Aqui va la pos actual
-            try {
-                sleep(500);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            for (int i = posActual; movimiento >= 0; i++) {
+                GUIFicha tile = pantalla.tableroGrafico.siguienteEspacio(pantalla.tableroGrafico.casillas[i]);
+                pantalla.tableroGrafico.pintarLabel(tile,piezaJugador);
+                try {
+                          sleep(500);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
             if(i != posActual+espacios)
                 pantalla.tableroGrafico.despintarLabel(tile);
-            else
-                lastTile = tile;
+            movimiento--;
+            }
         }
-    
+        //MovimientoNormal
+        else{
+            for (int i = posActual;movimiento >= 0; i++) {
+                if(i > 39){
+                    i = posActual = 0;
+                }
+                for (int k = 0; k < 2; k++) {
+                    for (int j = 0; j < 3; j++) {
+                        if(pantalla.tableroGrafico.casillas[posActual].fichas[k][j].label.getBackground()==colores[piezaJugador]){
+                            pantalla.tableroGrafico.despintarLabel(pantalla.tableroGrafico.casillas[posActual].fichas[k][j]);
+                            i = posActual += 1;
+                            if(i > 39){
+                                i = posActual = 0;
+                            }
+                            movimiento -= 1;
+                        }
+                    }
+                }
+                GUIFicha tile = pantalla.tableroGrafico.siguienteEspacio(pantalla.tableroGrafico.casillas[i]);
+                pantalla.tableroGrafico.pintarLabel(tile,piezaJugador);
+                try {
+                          sleep(500);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ThreadCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            if(i != nuevaPos)
+                pantalla.tableroGrafico.despintarLabel(tile);
+            movimiento--;
+            }
+        }
     }
     
     public void ponerPiezaEnGo(){

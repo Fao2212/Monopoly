@@ -94,7 +94,7 @@ public class Jugador {
     
     //no se si se setea la imagen
     public void siguienteCasilla(){
-        if (pos == 39) pos = -1;//Pasar a 0
+        if (pos == 39) pos = 0;//Pasar a 0
         this.pos++;
         this.casilla = tablero.casillas[pos];
     }
@@ -105,8 +105,13 @@ public class Jugador {
     }
 
     public void setPos(int pos) {
-        this.pos += pos;
-        this.casilla = tablero.casillas[this.pos];
+        for (int i = 0; i < pos; i++) {
+            this.pos ++;
+            if(this.pos > 39)
+                this.pos = 0;
+            this.casilla = tablero.casillas[this.pos];
+        }
+
     }
     
     public void pagarPorCarcel(){
