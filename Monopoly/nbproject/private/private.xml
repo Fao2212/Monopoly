@@ -5,7 +5,7 @@
             <url>src/Server/ThreadCliente.java</url>
             <bookmark id="1">
                 <name/>
-                <line>108</line>
+                <line>115</line>
                 <key/>
             </bookmark>
         </file>
@@ -14,11 +14,8 @@
         <group>
             <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/Server/ThreadServer.java</file>
             <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/Server/ThreadCliente.java</file>
-            <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/GUI/formTablero.java</file>
-            <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/monopoly/Tablero.java</file>
-            <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/Logic/Jugador.java</file>
+            <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/monopoly/Casilla.java</file>
             <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/Server/Server.java</file>
-            <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/Server/Cliente.java</file>
         </group>
     </open-files>
 </project-private>

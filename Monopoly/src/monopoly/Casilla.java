@@ -55,6 +55,7 @@ class CasillaPropiedad extends Casilla{
 
     @Override
     public Propiedad doAction() {
+        System.out.println("propiedad");
         return getPropiedad();//Se da la opcion de comprar y si no se pone en subasta
     }
     
@@ -69,6 +70,7 @@ class CasillaEspecial extends Casilla{
     @Override
     public Propiedad doAction() {
         //Depende de que hace por pos de casilla hacer un switch
+        System.out.println("especial");
         return null;
     }
     
@@ -94,6 +96,7 @@ class CasillaCarta extends Casilla{
     @Override
     public Propiedad doAction() {
         //Sacar una carta y hacer su funcion
+        System.out.println("tarjeta");
         return null;
     }
     

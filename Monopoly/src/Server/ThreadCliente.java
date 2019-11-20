@@ -86,7 +86,7 @@ public class ThreadCliente extends Thread{
                 System.out.println("pido turno");
                 miTurno();
                 System.out.println("recibo turno");
-                if(turno){
+                if(turno){//Aqui yo meto la funcion de la accion
                     if (tirarDados) {
                         salida.writeInt(1);
                         tirarDados = false;
@@ -118,6 +118,9 @@ public class ThreadCliente extends Thread{
                 System.out.println("TiroDeDado"+dado);
                 System.out.println("Posi"+posi);
                 movimientoDePieza(dado,jug,posi);
+                if(jug == this.numeroDeJugador){
+                    cases(11);
+                }
                 break;
             case 5:
                 pantalla.jugadoresListos();
@@ -141,6 +144,9 @@ public class ThreadCliente extends Thread{
                 break;
             case 10:
                 pasarTurno();
+                break;
+            case 11:
+                conseguirAccion();
                 break;
             default:
                 System.out.println("error");
@@ -212,6 +218,19 @@ public class ThreadCliente extends Thread{
             movimiento--;
             }
         }
+    }
+    
+    public void conseguirAccion() throws IOException{//Que el server le envie a todos pero que solo cambie los datos del jugador
+        
+        salida.writeInt(6);
+        
+    }
+    
+    public void Accion(int opcion){//Recibe un entero y segun el caso le da opciones al cliente carga las imagenes que estan en pantalla
+        //si es compra se pregunta si quiere comprar o no la foto y se manda la opcion al tablero actualizando las propiedades del jugador
+        //Si es carta nada mas se escoge la foto y se alpica la funcion respectiva con el suffle
+        //Si es especial se aplica la accion respectiva y se cambia lo que se tenga que cambiar del jugador en carcel se tiene que tener un booleano 
+        //Aca para saber si lo puede usar o no
     }
     
     public void ponerPiezaEnGo(){

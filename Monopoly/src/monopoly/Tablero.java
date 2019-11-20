@@ -6,9 +6,12 @@
 package monopoly;
 
 import Logic.Cartas;
+import Logic.FactoryPropiedades;
+import Logic.FactoryTarjetas;
 import Logic.Jugador;
 import Random.CustomRandom;
 import java.awt.Color;
+import java.util.StringTokenizer;
 
 /**
  *
@@ -50,10 +53,10 @@ public class Tablero {
         casillas = new Casilla[40];
         casas = new Edificio[32];
         hoteles = new Edificio[12];
-        propiedades = new Propiedad[22];
+        propiedades = new Propiedad[28];
        dadosInicio(); 
-       
-        
+       asignarCasillas();
+
     }
     
     
@@ -92,7 +95,36 @@ public class Tablero {
     
     public void asignarCasillas(){
         //Aca se cargan las tarjetas y se ponen en sus respectivos campos y se rellenas los array de tarjetas
-    }
+        Propiedad prop[] = FactoryPropiedades.cargarPropiedades();
+        this.propiedades = prop;
+        for (Propiedad propiedad: prop) {
+            Casilla casilla = new CasillaPropiedad(propiedad,1,propiedad.lugarEnElTablero);
+            casillas[propiedad.lugarEnElTablero] = casilla;
+        }
+        for (Edificio casa : casas) {
+            casa = new Edificio(0);
+        }
+        for (Edificio hotel : hoteles){
+            hotel = new Edificio(1);
+        }
+        this.arcaComunal = FactoryTarjetas.cargarCartas(1);
+        this.casualidad = FactoryTarjetas.cargarCartas(2);
+        
+        casillas[0] = new CasillaEspecial(GO, 2);
+        casillas[10] = new CasillaEspecial(VISITANDO_CARCEL, 2);
+        casillas[20] = new CasillaEspecial(FREE_PARK, 2);
+        casillas[30] = new CasillaEspecial(CARCEL, 2);
+        casillas[4] = new CasillaEspecial(4, 2);
+        casillas[38] = new CasillaEspecial(38, 2);
+        
+        casillas[2] = new CasillaCarta(2, 3);
+        casillas[7] = new CasillaCarta(7, 3);
+        casillas[17] = new CasillaCarta(17, 3);
+        casillas[22] = new CasillaCarta(22, 3);
+        casillas[33] = new CasillaCarta(33, 3);
+        casillas[36] = new CasillaCarta(36, 3);
+        
+    } 
     
     public void ordenarJugadores(){
         int i, j,n= jugadores.length;

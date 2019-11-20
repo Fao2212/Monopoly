@@ -5,13 +5,14 @@
  */
 package Logic;
 
+import java.io.Serializable;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author migue
  */
-public class Cartas {
+public class Cartas implements Serializable{
     public String info;
     public ImageIcon imagen;
     

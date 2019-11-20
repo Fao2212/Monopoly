@@ -15,12 +15,11 @@ import javax.swing.ImageIcon;
  */
 public abstract class Propiedad implements Serializable{//Preguntar la mejor manera de ver si es hipotecable
     
-    String nombre;//Calle 
+    String nombre;
     int precio;
     int alquiler;
     public Jugador propietario = null;
-    //enum Clasificacion
-    /*enum+calle a la que pertenece + color*/int grupoDeColor;
+    int grupoDeColor;
     int lugarEnElTablero;
     int valorDeHipoteca;
     ImageIcon imagen;

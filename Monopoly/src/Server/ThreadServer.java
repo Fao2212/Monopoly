@@ -140,6 +140,9 @@ public class ThreadServer extends Thread{
             case 5:
                 miTurno();
                 break;
+            case 6:
+                servidor.tablero.casillas[player.pos].doAction();//Desde la pantalla que si le da que si la compra, si no sigue normal luego encargarse de la subasta
+                break;
         }
     }
     

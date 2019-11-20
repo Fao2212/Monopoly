@@ -5,10 +5,6 @@
  */
 package monopoly;
 
-import CartasChance.AdvanceToGo;
-import Logic.Cartas;
-import Logic.FactoryPropiedades;
-
 
 /**
  *
@@ -20,7 +16,7 @@ public class Monopoly {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        FactoryPropiedades.guardarRespaldo(FactoryPropiedades.cargarPropiedades());
+
     }
     
 }

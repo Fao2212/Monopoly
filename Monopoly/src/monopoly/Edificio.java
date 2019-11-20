@@ -5,6 +5,7 @@
  */
 package monopoly;
 
+import Logic.Jugador;
 import javax.swing.ImageIcon;
 
 /**
@@ -12,18 +13,14 @@ import javax.swing.ImageIcon;
  * @author ferol
  */
 public class Edificio {
-    //Jugador propietario;
-    //Casilla o Propiedad a la que pertenece
-    private final ImageIcon imagen;//Se suben las dos imagenes de casa y hotel
+    Jugador propietario;
+    Casilla lugar;
     private final int tipo;//Depende de si es casa o es hotel Cambiar por un enum
 
-    public Edificio(ImageIcon imagen, int tipo) {
-        this.imagen = imagen;
+  public Edificio(int tipo) {
         this.tipo = tipo;
-    }
-
-    public ImageIcon getImagen() {
-        return imagen;
+        this.lugar = null;
+        this.propietario = null;
     }
 
     public int getTipo() {

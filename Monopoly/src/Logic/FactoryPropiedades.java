@@ -33,7 +33,7 @@ public class FactoryPropiedades {
     }
     
     public static void crearArchivoDePropiedades(){
-        Propiedad propiedades[]= new Propiedad[27];
+        Propiedad propiedades[]= new Propiedad[28];
         FileManager.FileManager.writeObject(propiedades,"Propiedades.txt");
         FileManager.FileManager.writeObject(propiedades,"PropiedadesRespaldo.txt");
     }
