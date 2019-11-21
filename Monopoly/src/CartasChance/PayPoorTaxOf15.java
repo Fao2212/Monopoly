@@ -24,6 +24,7 @@ public class PayPoorTaxOf15 extends Cartas{
     @Override
     public void Action(Jugador jugador){
         jugador.dinero = jugador.dinero - 15;
+                System.out.println(info);
     }
     
     

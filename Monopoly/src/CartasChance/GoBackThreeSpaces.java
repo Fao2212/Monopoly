@@ -24,6 +24,7 @@ public class GoBackThreeSpaces extends Cartas{
     public void Action(Jugador jugador){
         jugador.pos = jugador.pos - 3;
         jugador.casilla = jugador.tablero.casillas[jugador.pos];
+                System.out.println(info);
     }
     //la pos le resta x o y
 }

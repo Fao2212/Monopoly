@@ -25,5 +25,6 @@ public class Receive25ConsultancyFee extends Cartas{
     @Override
     public void Action(Jugador jugador){
         jugador.dinero = jugador.dinero + 25;
+                System.out.println(info);
     }
 }

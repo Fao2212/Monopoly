@@ -26,6 +26,7 @@ public class BankErrorInYourFavor extends Cartas{
     @Override
     public void Action(Jugador jugador){
         jugador.dinero = jugador.dinero + 200;
+                System.out.println(info);
     }
     
 }

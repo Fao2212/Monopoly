@@ -33,6 +33,7 @@ public class AdvanceToStCharlesPlace extends Cartas{
                 jugador.dinero = jugador.dinero + 200;
             }
         }
+                System.out.println(info);
     }
     //va recorriendo los labels hasta llegar al destino, si pasa por el inicio suma 200
 }

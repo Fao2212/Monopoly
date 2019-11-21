@@ -17,9 +17,12 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import GUI.customLabel;
+import GUI.formCompra;
+import GUI.formTarjeta;
 import java.awt.Color;
 import java.awt.Point;
 import javax.swing.JLabel;
+import monopoly.Tablero;
 
 /**
  *
@@ -40,6 +43,7 @@ public class ThreadCliente extends Thread{
     int maxPlayers;
     GUIFicha lastTile;
     int tirosInicio;
+    int posActual;
 
     public ThreadCliente(DataInputStream entrada, DataOutputStream salida, formTablero pantalla) {
         this.running = true;
@@ -92,7 +96,7 @@ public class ThreadCliente extends Thread{
                         tirarDados = false;
                     }
                     else
-                        System.out.println("Dados Lanzados");
+                        System.out.println("Dados Lanzados");//Anadir unos joptionpanel
                 }
                 else
                     System.out.println("No es mi turno");
@@ -118,7 +122,7 @@ public class ThreadCliente extends Thread{
                 System.out.println("TiroDeDado"+dado);
                 System.out.println("Posi"+posi);
                 movimientoDePieza(dado,jug,posi);
-                if(jug == this.numeroDeJugador){
+                if(jug == this.numeroDeJugador){//Aca es donde escoge la accion se muestra a todos pero solo se le aplica a un jugador
                     cases(11);
                 }
                 break;
@@ -146,7 +150,28 @@ public class ThreadCliente extends Thread{
                 pasarTurno();
                 break;
             case 11:
-                conseguirAccion();
+                accionPantalla();
+                //Dependiendo del tipo de propiedad hace algo diferente
+                break;
+            case 12://Comprar propiedad
+                salida.writeInt(7);
+                break;
+            case 13://Recibir evento
+                break;
+            case 14://Subastar propiedad
+                break;
+            case 15://Recibir datos
+                setClienteInfo();
+                break;
+            case 16://Actualizar Datos
+                setClienteInfo();
+                break;
+            case 17:
+                dineroInsuficiente();
+                break;
+            case 18://Esto borra la ultima pos cuando salta
+                int jugador = entrada.readInt();
+                borrarElEspacio(jugador);
                 break;
             default:
                 System.out.println("error");
@@ -156,7 +181,7 @@ public class ThreadCliente extends Thread{
         
     }
     //Enemiga propia
-    public void movimientoDePieza(int espacios,int piezaJugador,int posActual){
+    public void movimientoDePieza(int espacios,int piezaJugador,int posActual) throws IOException{
         
         int movimiento = espacios;
         int nuevaPos = posActual + espacios;
@@ -192,6 +217,9 @@ public class ThreadCliente extends Thread{
         else{
             for (int i = posActual;movimiento >= 0; i++) {
                 if(i > 39){
+                    if(piezaJugador == this.numeroDeJugador){//Aca es donde escoge la accion se muestra a todos pero solo se le aplica a un jugador
+                        pasaPorGo();//Solo para subir a uno
+                    }
                     i = posActual = 0;
                 }
                 for (int k = 0; k < 2; k++) {
@@ -218,6 +246,7 @@ public class ThreadCliente extends Thread{
             movimiento--;
             }
         }
+        this.posActual = nuevaPos;
     }
     
     public void conseguirAccion() throws IOException{//Que el server le envie a todos pero que solo cambie los datos del jugador
@@ -245,9 +274,11 @@ public class ThreadCliente extends Thread{
     }
     
     public void setClienteInfo() throws IOException{//Podria enviar todo el player
-        this.turno = entrada.readBoolean();//Turno
-        pantalla.labelDinero.setText(String.valueOf(entrada.readInt()));//Dinero
-        pantalla.labelTurno.setText(entrada.readUTF());//Nombre del jugador del turno actual
+        int dinero = entrada.readInt();
+        String nombre = entrada.readUTF();
+        pantalla.setDinero(dinero);
+        pantalla.setJugadorJugando(nombre);
+        
         //Propiedades
         //Casas
     }
@@ -277,6 +308,98 @@ public class ThreadCliente extends Thread{
         salida.writeInt(4);
         System.out.println("Paso");
     }
-}
+    
+    public int accionPantalla() throws IOException{//Abre una pantalla que diga chance y otra para el chest
+
+        for (int x : Tablero.POSICIONESESPECIALES) {//Preguntar si es de moverse o de cobrar o pagar
+            
+            if (this.posActual == Tablero.CARCEL) {//Hacer casos para todos go no hace nada, free nada, visita nada
+                salida.writeInt(10);//Enviar a la carcel
+                iniciarPantallaAnuncio(this);//Hacer pantallas para los casos foto enviado a la carcel
+                return 1;
+            }
+            else if (this.posActual == x) {
+                iniciarPantallaAnuncio(this);//Cargar la foto
+                return 2;
+            }
+        }
+        
+        for (int x : Tablero.POSICIONES_CHANCE) {//Preguntar si es de moverse o de cobrar o pagar
+            if (this.posActual == x) {
+                salida.writeInt(11);
+                //Aca recibe el numero y abre la pantalla con el entero con la foto
+                //O nada mas mostrar el mensaje de info de la tarjeta 
+                iniciarPantallaAnuncio(this);//Cargar la foto
+                return 2;
+            }
+        }
+        
+        for (int x : Tablero.POSICIONES_COMUNNITY) {
+            if (this.posActual == x) {
+                salida.writeInt(12);
+                iniciarPantallaAnuncio(this);
+               return 3;
+            } 
+        }
+
+        salida.writeInt(6);
+        int des = entrada.readInt();
+        if(des == 1)
+            iniciarPantallaCompra(this);//Primero preguntar si tiene dueno, si no abre pantala de otra manera paga se puede hacer una pantalla de pagos
+        else if(des == 2){
+            System.out.println("Soy dueno");
+        }
+        else{
+            //Falta una pantalla o algo para indicar pagos o una manera de indicar que se pierde dinero
+            salida.writeInt(8);//Pago de alquiler
+            }
+        return 4;
+        
+    }
+    
+    public void iniciarPantallaCompra(ThreadCliente thread/*O una foto*/){//Tambien tiene un modo subasta
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new formCompra(thread).setVisible(true);
+            }
+        });
+    }
+
+    public void iniciarPantallaAnuncio(ThreadCliente thread){
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new formTarjeta(thread).setVisible(true);
+            }
+        }); 
+    }
+    
+    public void saltoDePosicion(int nuevaPosicion){
+        
+    }
+    
+    public void dineroInsuficiente(){
+        //Pantalla que diga que no tiene dinero
+        System.out.println("Dinero Insuficiente");
+    }
+
+    public void pasaPorGo() throws IOException {
+        System.out.println("Quiero Escribir");
+        salida.writeInt(9);
+        System.out.println("Escribi");
+    }
+    
+    public void borrarElEspacio(int jugador){//Pasar el mismo jugador a todos
+        for (int k = 0; k < 2; k++) {
+            for (int j = 0; j < 3; j++) {
+                if(pantalla.tableroGrafico.casillas[posActual].fichas[k][j].label.getBackground()==colores[jugador]){
+                    pantalla.tableroGrafico.despintarLabel(pantalla.tableroGrafico.casillas[posActual].fichas[k][j]);
+                }
+            }
+        }
+    }
+}//Una funcion que avance 1 por 1 sin pintar para cobrar el go
+
     
 

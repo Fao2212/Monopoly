@@ -25,6 +25,7 @@ public class IncomeTaxRefund extends Cartas{
     @Override
     public void Action(Jugador jugador){
         jugador.dinero = jugador.dinero + 20;
+                System.out.println(info);
     }
     //genera un random de la pos del array de jugadores y le resta 20 y se lo suma a este jugador
 }

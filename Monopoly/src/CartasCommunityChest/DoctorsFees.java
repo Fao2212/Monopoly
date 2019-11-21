@@ -25,6 +25,7 @@ public class DoctorsFees extends Cartas{
     @Override
     public void Action(Jugador jugador){
         jugador.dinero = jugador.dinero - 50;
+                System.out.println(info);
     }
     
 }

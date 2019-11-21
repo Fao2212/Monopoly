@@ -35,15 +35,23 @@ public class Banco {
    }
    
    public static boolean comprobarDineroDeJugador(Jugador jugador,int cantidad){
-       if(true/*jugador.dinero >= cantidad*/)
+       if(jugador.dinero >= cantidad)
             return true;
        else
            return false;
    }
    
-   public static void comprarPropiedad(Propiedad propiedad,Jugador jugador){//El jugador tambien tiene que tener uno de estos 
-       if(comprobarDineroDeJugador(jugador,propiedad.precio))//Return un boolean para dar el mensaje de que no pudo comprar
-           cobrarAJugador(jugador,propiedad.precio);
+   public static boolean comprarPropiedad(Propiedad propiedad,Jugador jugador){//El jugador tambien tiene que tener uno de estos 
+       if(comprobarDineroDeJugador(jugador,propiedad.precio)){//Return un boolean para dar el mensaje de que no pudo comprar
+           jugador.comprar(propiedad);
+           return true;
+       }
+       else {
+           System.out.println("Dinero insuficiente");
+           return false;}
+           //Preguntar si quiere vender, si no puede vender nada entonces pierde(Considerar casas, propiedades, ..)
+           //Boton para rendirse(Cuando vota que no)
+           //Este pago es opcional pierde cuando es un pago obligatorio. A otro jugador o a el banco(Alquileres)
    }
    
    public static void hipotecarPropiedad(/*Propiedad y jugador*/){

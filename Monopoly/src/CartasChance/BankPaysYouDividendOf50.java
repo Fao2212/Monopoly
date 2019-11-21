@@ -23,6 +23,7 @@ public class BankPaysYouDividendOf50 extends Cartas{
     
     @Override
     public void Action(Jugador jugador){
-        jugador.dinero = jugador.dinero + 50;                       //no se lo de dividend
+        jugador.dinero = jugador.dinero + 50;       
+                System.out.println(info);//no se lo de dividend
     }
 }

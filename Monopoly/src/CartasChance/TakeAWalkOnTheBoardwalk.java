@@ -29,6 +29,7 @@ public class TakeAWalkOnTheBoardwalk extends Cartas{
                 jugador.pagarAlquiler(jugador.casilla.doAction());
             }
         }
+                System.out.println(info);
     }
     //se mueve hasta el destino
 }

@@ -27,6 +27,7 @@ public class ItIsYourBirthday extends Cartas{
             jugador.tablero.jugadores[i].dinero = jugador.tablero.jugadores[i].dinero - 10;
             jugador.dinero = jugador.dinero + 10;
         }
+                System.out.println(info);
     }
     //recorre array de jugadores les quita 10 y se lo suma a este jugador
 }

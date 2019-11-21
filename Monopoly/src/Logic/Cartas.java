@@ -22,6 +22,9 @@ public class Cartas implements Serializable{
     
     public Tipo tipo;
     
+    //Hacer una preugnta de si el dinero guardado como una variable es diferente del dinero
+    //Si la posicion cambio 
+    //O si ahora la tarjeta tiene una persona y se devuelve un numero segun la opcion
     
     
     

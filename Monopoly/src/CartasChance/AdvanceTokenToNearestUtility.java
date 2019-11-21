@@ -35,5 +35,7 @@ public class AdvanceTokenToNearestUtility extends Cartas{
             jugador.dinero = jugador.dinero - alquiler;
             jugador.casilla.doAction().propietario.dinero = jugador.casilla.doAction().propietario.dinero + alquiler;
         }
+                System.out.println(info);
     }
+    
 }

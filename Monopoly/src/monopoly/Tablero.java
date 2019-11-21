@@ -23,11 +23,11 @@ public class Tablero {
     Edificio casas[];
     Edificio hoteles[];
     Propiedad propiedades[];
-    Cartas arcaComunal[];
-    Cartas casualidad[];
+    public Cartas arcaComunal[];
+    public Cartas casualidad[];
     public Jugador jugadores[];
     public Color colores[] = {Color.red,Color.blue,Color.orange,Color.green,Color.CYAN,Color.yellow,Color.red};
-    int indiceJugadorActual;
+    public int indiceJugadorActual;
     Integer dadosInicio[];
     int contRepPos;
     Jugador jugadorActual;
@@ -39,11 +39,12 @@ public class Tablero {
     public final static int POSICIONES_SERVICIOS[] = {12,28};
     public final static int VISITANDO_CARCEL = 10;
     public final static int IMPUESTOS[] = {4,38};
-    public final static int POSICIONESESPECIALES[] = {0,10,20,30};
+    public final static int POSICIONESESPECIALES[] = {0,10,20,30,4,38};
     public final static int FREE_PARK = 20;
     public final static int CARCEL = 30;
     public final static int GO = 0;
-    //contadores para los decks
+    int cartaActualChance = 0;
+    int cartaActualChest = 0;
     
 
     public Tablero() {
@@ -59,6 +60,14 @@ public class Tablero {
 
     }
     
+    
+    public Cartas sacarCartaChance(int num){//Luego mejorar a que sea un shuffle con un array de Integer que sea el que saque las pos
+        return casualidad[num];
+    }
+    
+    public Cartas sacarCartaChest(int num){
+        return arcaComunal[num];
+    }
     
     public void asignarUnColorAlJugadorPrueba(Jugador jugador){
         jugador.colorPrueba = colores[jugador.numeroDeJugador];
@@ -100,6 +109,7 @@ public class Tablero {
         for (Propiedad propiedad: prop) {
             Casilla casilla = new CasillaPropiedad(propiedad,1,propiedad.lugarEnElTablero);
             casillas[propiedad.lugarEnElTablero] = casilla;
+            System.out.println(propiedad.lugarEnElTablero+propiedad.nombre);
         }
         for (Edificio casa : casas) {
             casa = new Edificio(0);

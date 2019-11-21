@@ -5,6 +5,9 @@
  */
 package monopoly;
 
+import Logic.FactoryPropiedades;
+import Logic.FactoryTarjetas;
+
 
 /**
  *
@@ -16,7 +19,7 @@ public class Monopoly {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-    }
+   }
+    
     
 }

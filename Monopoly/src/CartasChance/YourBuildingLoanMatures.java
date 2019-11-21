@@ -25,6 +25,7 @@ public class YourBuildingLoanMatures extends Cartas{
     @Override
     public void Action(Jugador jugador){
         jugador.dinero = jugador.dinero + 150;
+                System.out.println(info);
     }
     
     

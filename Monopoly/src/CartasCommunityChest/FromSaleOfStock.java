@@ -24,6 +24,7 @@ public class FromSaleOfStock extends Cartas{
     @Override
     public void Action(Jugador jugador){
         jugador.dinero = jugador.dinero + 45;
+                System.out.println(info);
     }
     
 }

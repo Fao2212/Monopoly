@@ -25,6 +25,7 @@ public class GoToJail extends Cartas{
     public void Action(Jugador jugador){
         jugador.setPos(10);
         jugador.carcel = true;
+                System.out.println(info);
     }
     //lo pone en la carcel y las condiciones de carcel
 }

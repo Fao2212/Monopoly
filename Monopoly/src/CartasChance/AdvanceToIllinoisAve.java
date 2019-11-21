@@ -23,7 +23,7 @@ public class AdvanceToIllinoisAve extends Cartas{
     
     
     @Override
-    public void Action(Jugador jugador){
+    public void Action(Jugador jugador){//Solo cambiar la pos
         while (jugador.pos != 24){
             jugador.siguienteCasilla();
             if (jugador.casilla.tipo == 3 && jugador.casilla.doAction().propietario != null){                                             //o el numero de propiedad
@@ -33,6 +33,7 @@ public class AdvanceToIllinoisAve extends Cartas{
                 jugador.dinero = jugador.dinero + 200;
             }
         }
+            System.out.println(info);
     }
     
     

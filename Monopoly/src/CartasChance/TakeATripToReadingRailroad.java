@@ -32,6 +32,7 @@ public class TakeATripToReadingRailroad extends Cartas{
                 jugador.dinero = jugador.dinero + 200;
             }
         }
+                System.out.println(info);
     }
     //se mueve en el tablero hasta llegar al destino
 }

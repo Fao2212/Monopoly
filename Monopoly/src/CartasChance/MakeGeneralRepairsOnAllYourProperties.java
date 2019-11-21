@@ -32,6 +32,7 @@ public class MakeGeneralRepairsOnAllYourProperties extends Cartas{
             if (jugador.propiedades.get(i).doActionHotel() == 1)
                 jugador.dinero = jugador.dinero - 100;
         }
+                System.out.println(info);
     }
     //recorre el arraylist de propiedades y va pagando
 }

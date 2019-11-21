@@ -37,7 +37,7 @@ public class Jugador {
     public Jugador(String nombre, Tablero t){
         this.nombre = nombre;
         this.turno = false;
-        this.dinero = 1500;
+        this.dinero = 200;
         this.resultado = 0;
         this.numeroDeJugador = numeroDeJugador;
         this.tablero = t;
@@ -48,6 +48,11 @@ public class Jugador {
         this.carcel = false;
     }
 
+    public void enviarALaCarcel(){//
+        this.carcel = true;
+        this.pos = 10;
+    }
+    
     public boolean isTurno() {
         return turno;
     }
@@ -61,10 +66,11 @@ public class Jugador {
         return this.resultado;
     }
     
-    public void comprar(Propiedad propiedad){                    
+    public void comprar(Propiedad propiedad){               //Agregar la foto a la lista en pantalla     
         propiedades.add(propiedad);
         propiedad.propietario = this;
         this.dinero = this.dinero - propiedad.getPrecio();
+        System.out.println("Jugador"+this.nombre+"Compra"+propiedad.getNombre());
     }
     
     public int encontrarPropiedad(Propiedad buscar){

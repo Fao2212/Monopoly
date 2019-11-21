@@ -172,4 +172,18 @@ public class Server {
             cliente.enviarInfoCliente();
         }
     }
+    
+    public void informarCompra(){
+        
+    }
+    
+    public void informarPago(){
+        
+    }
+
+    void borrarPiezaATodos(int numeroDeJugador) throws IOException {
+        for (ThreadServer cliente : threadClientes) {
+            cliente.borrarUnEspacio(numeroDeJugador);
+        }
+    }
 }

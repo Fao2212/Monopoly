@@ -26,6 +26,7 @@ public class GrandOperaNight extends Cartas{
         for (int i = 0; i < jugador.tablero.jugadores.length; i++) {
             jugador.tablero.jugadores[i].dinero = jugador.tablero.jugadores[i].dinero - 50;
             jugador.dinero = jugador.dinero + 50;
+                    System.out.println(info);
         }
     }
     //recorre array de jugadores y les quita 50 mientras se lo suma al de la carta

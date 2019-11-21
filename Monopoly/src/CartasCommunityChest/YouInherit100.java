@@ -25,6 +25,7 @@ public class YouInherit100 extends Cartas{
     @Override
     public void Action(Jugador jugador){
         jugador.dinero = jugador.dinero + 100;
+                System.out.println(info);
     }
     
 }

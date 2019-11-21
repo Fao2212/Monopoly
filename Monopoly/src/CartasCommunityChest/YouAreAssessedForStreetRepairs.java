@@ -31,6 +31,7 @@ public class YouAreAssessedForStreetRepairs extends Cartas{
             if (jugador.propiedades.get(i).doActionHotel() == 1)
                 jugador.dinero = jugador.dinero - 115;
         }
+                System.out.println(info);
     }
     //recorre su array de propiedades y le va restando lo que toca
 }

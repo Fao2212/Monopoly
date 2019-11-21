@@ -34,6 +34,7 @@ public class AdvanceTokenToNearestRailroad extends Cartas{
             jugador.pagarAlquiler(jugador.casilla.doAction());
             jugador.pagarAlquiler(jugador.casilla.doAction());
         }
+                System.out.println(info);
     }
     //recorre tablero hasta llegar a un railroad, si jugador != null tira dados y le paga el resultado * 10, sino puede comprarlo
 }

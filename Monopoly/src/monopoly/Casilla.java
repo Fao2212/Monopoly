@@ -55,8 +55,7 @@ class CasillaPropiedad extends Casilla{
 
     @Override
     public Propiedad doAction() {
-        System.out.println("propiedad");
-        return getPropiedad();//Se da la opcion de comprar y si no se pone en subasta
+            return getPropiedad();//Se da la opcion de comprar y si no se pone en subasta
     }
     
 }
@@ -100,7 +99,7 @@ class CasillaCarta extends Casilla{
         return null;
     }
     
-    public void sacarCarta(){
+    public void sacarCarta(){//Crear una nueva propiedad sin nada y usar uno de sus valores para enviar enteros
         //Se saca la primera carta y se aplica su efecto
     }
      

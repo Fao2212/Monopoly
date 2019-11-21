@@ -25,6 +25,7 @@ public class YouHaveWonSecondPrizeInABeautyContest extends Cartas{
     @Override
     public void Action(Jugador jugador){
         jugador.dinero = jugador.dinero + 10;
+                System.out.println(info);
     }
     //no se si es a uno random
 }

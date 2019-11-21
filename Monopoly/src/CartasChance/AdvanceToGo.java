@@ -31,5 +31,6 @@ public class AdvanceToGo extends Cartas{
             }
         }
         jugador.dinero = jugador.dinero + 200;
+        System.out.println(info);
     }
 }

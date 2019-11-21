@@ -20,8 +20,8 @@ import javax.swing.JOptionPane;
 public class Cliente {//Solamente pinta la pantalla
 
    Socket socket;
-    formTablero pantallaTablero;
-    inicioCliente pantallaInicio;
+   formTablero pantallaTablero;
+   inicioCliente pantallaInicio;
    DataInputStream entrada;
    DataOutputStream salida;
    String nombre;

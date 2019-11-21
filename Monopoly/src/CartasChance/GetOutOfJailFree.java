@@ -25,12 +25,14 @@ public class GetOutOfJailFree extends Cartas{
     //cuando sale la carta se la asigna al jugador
     public void asignarPersona(Jugador j){
         this.jugador = j;
+                System.out.println(info);
     }
     
     
     @Override
     public void Action(Jugador jugador){
         jugador.carcel = false;
+                System.out.println("Use carta Carcel");
     }
     
 }

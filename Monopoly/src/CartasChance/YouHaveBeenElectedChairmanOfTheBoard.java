@@ -27,6 +27,7 @@ public class YouHaveBeenElectedChairmanOfTheBoard extends Cartas{
             jugador.dinero = jugador.dinero - 50;
             jugador.tablero.jugadores[i].dinero = jugador.tablero.jugadores[i].dinero + 50;
         }
+                System.out.println(info);
     }
     //recorre el array de jugadores y les da 50 mientras se lo resta al jugador de la carta
 }
