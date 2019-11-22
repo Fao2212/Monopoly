@@ -19,15 +19,17 @@ public abstract class Casilla {
     int cantidadDeFichas;
     int index;//Puede quitarse si no se necesita
     public int tipo;//Especial,Carta,Propiedad
+    public Edificio casas[];
+    public Edificio hotel;
 
     public Casilla(int index, int tipo) {
         this.empty = this.asignada =  false;
         this.index = index;
         this.tipo = tipo;
+        this.casas = new Edificio[4];
+        this.hotel = null;
     }
-
-    
-    
+//Usar un if bien fuerte para cuando 
     public boolean isEmpty() {
         return empty;
     }

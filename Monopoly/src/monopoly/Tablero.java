@@ -60,6 +60,29 @@ public class Tablero {
 
     }
     
+    public void asignarCasa(Edificio casa,int posicion){
+        Propiedad prop = casillas[posicion].doAction();
+    }
+    
+    public void asignarHotel(Edificio hotel,int posicion){
+        
+    }
+    
+    public Edificio siguienteCasa(){
+        for (Edificio casa : casas) {
+            if(casa.propietario == null)
+                return casa;
+        }
+        return null;
+    }
+    
+    public Edificio siguienteHoteles(){
+        for (Edificio hotel : hoteles) {
+            if(hotel.propietario == null)
+                return hotel;
+        }
+        return null;
+    }
     
     public Cartas sacarCartaChance(int num){//Luego mejorar a que sea un shuffle con un array de Integer que sea el que saque las pos
         return casualidad[num];

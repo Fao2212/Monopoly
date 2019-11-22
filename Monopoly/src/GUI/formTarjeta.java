@@ -18,9 +18,19 @@ public class formTarjeta extends javax.swing.JFrame {
      */
     ThreadCliente thread;
     
-    public formTarjeta(ThreadCliente thread) {
+    public formTarjeta(ThreadCliente thread,int num,int tipo) {
         initComponents();
-        this.thread = thread;
+        if(num == 50){//Tambien cuando es -1 que no ponga nada
+            
+        }
+        else{
+            if(tipo == 0){
+                this.labelCarta.setIcon(thread.chanceImages[num]);
+            }
+            else if(tipo == 1){
+                this.labelCarta.setIcon(thread.cchestImages[num]);
+            }
+        }
     }
 
     /**
@@ -38,7 +48,10 @@ public class formTarjeta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 204, 153));
+
         jButton1.setText("Aceptar");
+        jButton1.setOpaque(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -66,7 +79,7 @@ public class formTarjeta extends javax.swing.JFrame {
                 .addComponent(labelCarta, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -77,9 +90,7 @@ public class formTarjeta extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

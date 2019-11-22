@@ -6,6 +6,7 @@
 package Logic;
 
 import java.io.Serializable;
+import monopoly.Edificio;
 import monopoly.Propiedad;
 
 /**
@@ -43,5 +44,10 @@ class Servicio extends Propiedad implements Serializable{
     public void metodoDeAumento(int dado){
         
     }
+
+    /*@Override
+    public int asignarCasa(Edificio edificio) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
     
 }

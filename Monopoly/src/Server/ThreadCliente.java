@@ -6,25 +6,17 @@
 package Server;
 
 import GUI.GUIFicha;
-import GUI.GUITablero;
-import GUI.formPantallaClientePrueba;
 import GUI.formTablero;
-import Logic.Jugador;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import GUI.customLabel;
 import GUI.formCompra;
 import GUI.formTarjeta;
 import java.awt.Color;
-import java.awt.Point;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import monopoly.Tablero;
 
 /**
@@ -34,8 +26,8 @@ import monopoly.Tablero;
 public class ThreadCliente extends Thread{
     
     Socket cliente; 
-    DataInputStream entrada;
-    DataOutputStream salida;
+    public DataInputStream entrada;
+    public DataOutputStream salida;
     public formTablero pantalla;//Este seria el juego con el tablero PINTA SU PROPIO JUEGO
     boolean running;
     boolean empezado;
@@ -48,10 +40,10 @@ public class ThreadCliente extends Thread{
     int tirosInicio;
     public int posActual;
     public ImageIcon propImages[];
-    String pathPropiedades = "C:\\Users\\ferol\\OneDrive\\Documentos\\GitHub\\Monopoly\\Monopoly\\src\\GUI\\propiedades";
-    ImageIcon cchestImages[];
+    public String pathPropiedades = "C:\\Users\\ferol\\OneDrive\\Documentos\\GitHub\\Monopoly\\Monopoly\\src\\GUI\\propiedades";
+    public ImageIcon cchestImages[];
     String pathChest = "C:\\Users\\ferol\\OneDrive\\Documentos\\GitHub\\Monopoly\\Monopoly\\src\\GUI\\cchest";
-    ImageIcon chanceImages[];
+    public ImageIcon chanceImages[];
     String pathChance = "C:\\Users\\ferol\\OneDrive\\Documentos\\GitHub\\Monopoly\\Monopoly\\src\\GUI\\chance";
     
     public ThreadCliente(DataInputStream entrada, DataOutputStream salida, formTablero pantalla) {
@@ -207,6 +199,9 @@ public class ThreadCliente extends Thread{
                 int jugador = entrada.readInt();
                 borrarElEspacio(jugador);
                 break;
+            case 19:
+                String propi = entrada.readUTF();
+                pantalla.labelPropietarioProp.setText(propi);
             default:
                 System.out.println("error");
         }
@@ -349,11 +344,11 @@ public class ThreadCliente extends Thread{
             
             if (this.posActual == Tablero.CARCEL) {//Hacer casos para todos go no hace nada, free nada, visita nada
                 salida.writeInt(10);//Enviar a la carcel
-                iniciarPantallaAnuncio(this);//Hacer pantallas para los casos foto enviado a la carcel
+                iniciarPantallaAnuncio(this,50,2);//Hacer pantallas para los casos foto enviado a la carcel
                 return 1;
             }
             else if (this.posActual == x) {
-                iniciarPantallaAnuncio(this);//Cargar la foto
+                iniciarPantallaAnuncio(this,-1,2);//Cargar la foto
                 return 2;
             }
         }
@@ -361,9 +356,8 @@ public class ThreadCliente extends Thread{
         for (int x : Tablero.POSICIONES_CHANCE) {//Preguntar si es de moverse o de cobrar o pagar
             if (this.posActual == x) {
                 salida.writeInt(11);
-                //Aca recibe el numero y abre la pantalla con el entero con la foto
-                //O nada mas mostrar el mensaje de info de la tarjeta 
-                iniciarPantallaAnuncio(this);//Cargar la foto
+                int num = entrada.readInt();
+                iniciarPantallaAnuncio(this,num,0);//Cargar la foto
                 return 2;
             }
         }
@@ -371,7 +365,8 @@ public class ThreadCliente extends Thread{
         for (int x : Tablero.POSICIONES_COMUNNITY) {
             if (this.posActual == x) {
                 salida.writeInt(12);
-                iniciarPantallaAnuncio(this);
+                int numo = entrada.readInt();
+                iniciarPantallaAnuncio(this,numo,1);
                return 3;
             } 
         }
@@ -400,17 +395,13 @@ public class ThreadCliente extends Thread{
         });
     }
 
-    public void iniciarPantallaAnuncio(ThreadCliente thread){
+    public void iniciarPantallaAnuncio(ThreadCliente thread,int num,int tipo){
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new formTarjeta(thread).setVisible(true);
+                new formTarjeta(thread,num,tipo).setVisible(true);
             }
         }); 
-    }
-    
-    public void saltoDePosicion(int nuevaPosicion){
-        
     }
     
     public void dineroInsuficiente(){

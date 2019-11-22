@@ -6,6 +6,7 @@
 package Logic;
 
 import java.io.Serializable;
+import monopoly.Edificio;
 import monopoly.Propiedad;
 
 /**
@@ -37,5 +38,10 @@ class Ferrocarril extends Propiedad implements Serializable{
     public int doActionHotel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    /*@Override
+    public int asignarCasa(Edificio edificio) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
     
 }

@@ -37,7 +37,7 @@ public class Jugador {
     public Jugador(String nombre, Tablero t){
         this.nombre = nombre;
         this.turno = false;
-        this.dinero = 200;
+        this.dinero = 1500;
         this.resultado = 0;
         this.numeroDeJugador = numeroDeJugador;
         this.tablero = t;
@@ -124,6 +124,13 @@ public class Jugador {
         this.carcel = false;
     }
     
+    public void comprarCasa(Propiedad propiedad){
+        Propiedad pro = propiedades.get(propiedades.indexOf(propiedad));
+
+    }
     
+    public void comprarHotel(){
+        
+    }
     
 }

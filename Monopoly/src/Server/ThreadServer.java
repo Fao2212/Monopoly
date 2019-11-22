@@ -156,14 +156,14 @@ public class ThreadServer extends Thread{
                     else;
                         salida.writeInt(0);
                 break;
-            case 7:
+            case 7://Aca consulta si puede comprar
                 boolean puede = Banco.comprarPropiedad(servidor.tablero.casillas[player.pos].doAction(), player);
                 if(puede)
                     actualizarInfoCliente();
                 else
                     salida.writeInt(17);
                 break;
-            case 8:
+            case 8://Aca compra
                 Propiedad propiedad = servidor.tablero.casillas[player.pos].doAction();
                 player.pagarAlquiler(propiedad);
                 System.out.println("Se pago "+propiedad.getAlquiler()+"del"+player.nombre+"a"+propiedad.propietario);
@@ -183,16 +183,31 @@ public class ThreadServer extends Thread{
             case 11:
                 int num = CustomRandom.randomRange(0, servidor.tablero.casualidad.length);
                 Cartas chance = servidor.tablero.sacarCartaChance(num);
-                //Enviar numero
+                salida.writeInt(num);
                 chance.Action(player);
                 actualizarInfoCliente();
                 break;
             case 12:
                 int numo = CustomRandom.randomRange(0, servidor.tablero.arcaComunal.length);
                 Cartas chest = servidor.tablero.sacarCartaChest(numo);
-                //Enviar numero
+                salida.writeInt(numo);
+                int antPos = player.pos;
                 chest.Action(player);
+                if(antPos != player.pos){
+                    servidor.borrarPiezaATodos(numeroDeJugador);
+                    servidor.moverPiezaTodos(0, player.numeroDeJugador, player.pos);//Revisar usar esto en una funcion para saltos
+                }
                 actualizarInfoCliente();
+                break;
+            case 13:
+                int posinum = entrada.readInt();
+                String propietarioMes;
+                if(servidor.tablero.casillas[posinum].doAction().propietario == null)
+                    propietarioMes = "Sin propietario";
+                else
+                    propietarioMes = servidor.tablero.casillas[player.pos].doAction().propietario.nombre;
+                salida.writeInt(19);
+                salida.writeUTF(propietarioMes);
                 break;
         }
     }

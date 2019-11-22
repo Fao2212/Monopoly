@@ -11,6 +11,9 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
@@ -93,6 +96,15 @@ public class GUITablero {
             @Override
             public void mouseEntered(MouseEvent e){
                 cliente.thread.pantalla.mostrarPropiedad(cliente.thread.propImages[tile.numeroDeCasilla]);
+            }
+            @Override
+            public void mouseClicked(MouseEvent e){
+                try {
+                    cliente.thread.salida.writeInt(13);
+                    cliente.thread.salida.writeInt(tile.numeroDeCasilla);
+                } catch (IOException ex) {
+                    Logger.getLogger(GUITablero.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }});
             
             if(i == 0)
@@ -113,6 +125,10 @@ public class GUITablero {
             @Override
             public void mouseEntered(MouseEvent e){
                 cliente.thread.pantalla.mostrarPropiedad(cliente.thread.propImages[tile.numeroDeCasilla]);
+            }
+            @Override
+            public void mouseClicked(MouseEvent e){
+                System.out.println("rata");
             }});
             
             ypos1 += tile.dimensiony;
@@ -138,6 +154,10 @@ public class GUITablero {
             @Override
             public void mouseEntered(MouseEvent e){
                 cliente.thread.pantalla.mostrarPropiedad(cliente.thread.propImages[tile.numeroDeCasilla]);
+            }
+            @Override
+            public void mouseClicked(MouseEvent e){
+                System.out.println("rata");
             }});
             
             if(i == 20)

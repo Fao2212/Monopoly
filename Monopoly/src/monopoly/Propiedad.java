@@ -68,6 +68,7 @@ public abstract class Propiedad implements Serializable{//Preguntar la mejor man
     
     public abstract int doActionCasas();
     public abstract int doActionHotel();
+    //public abstract int asignarCasa(Edificio edificio);
     
 }
 
