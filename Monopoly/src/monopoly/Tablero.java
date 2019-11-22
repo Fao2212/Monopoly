@@ -275,7 +275,7 @@ public class Tablero {
     }
     
     public int lanzarDado(){
-        int dado = CustomRandom.randomRange(1, 7);
+        int dado = CustomRandom.randomRange(1, 13);
         return dado;
     }
     
@@ -285,10 +285,6 @@ public class Tablero {
     
     public void accionCasilla(Casilla casilla){
         casilla.doAction();
-    }
-    
-    public void enviarALaCarcel(/*Jugador*/){
-        
     }
     
     public void levantarHipoteca(/*Propiedad*/){

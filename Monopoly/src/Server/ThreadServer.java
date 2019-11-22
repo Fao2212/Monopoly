@@ -141,7 +141,7 @@ public class ThreadServer extends Thread{
             case 4:
                 System.out.println("Llego a a pasar");
                 servidor.tablero.siguienteJugador();
-                actualizarInfoCliente();//Deberia ser para todos? falta actualizar las propiedades
+                actualizarInfoCliente();
                 break;
             case 5:
                 miTurno();

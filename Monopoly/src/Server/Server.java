@@ -186,4 +186,10 @@ public class Server {
             cliente.borrarUnEspacio(numeroDeJugador);
         }
     }
+    
+    void actualizarInfoTodos() throws IOException{
+        for (ThreadServer cliente : threadClientes) {
+            cliente.actualizarInfoCliente();
+        }
+    }
 }

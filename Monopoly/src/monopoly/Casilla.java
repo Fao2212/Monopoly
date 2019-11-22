@@ -21,6 +21,7 @@ public abstract class Casilla {
     public int tipo;//Especial,Carta,Propiedad
     public Edificio casas[];
     public Edificio hotel;
+    public int indexCasa;
 
     public Casilla(int index, int tipo) {
         this.empty = this.asignada =  false;
@@ -28,6 +29,7 @@ public abstract class Casilla {
         this.tipo = tipo;
         this.casas = new Edificio[4];
         this.hotel = null;
+        indexCasa = 0;
     }
 //Usar un if bien fuerte para cuando 
     public boolean isEmpty() {
@@ -39,6 +41,20 @@ public abstract class Casilla {
     }
     
     public abstract Propiedad doAction();
+    
+    public void agregarLaCasa(Edificio casa){
+        if(indexCasa < 4){
+            casas[indexCasa] = casa;
+            indexCasa++;
+        }
+            
+    }
+    public void quitarCasa(){
+        if(indexCasa > 0){
+            indexCasa--;
+            casas[indexCasa] = null;
+        }
+    }
     
 }
 
