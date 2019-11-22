@@ -25,6 +25,7 @@ public class Cliente {//Solamente pinta la pantalla
    DataInputStream entrada;
    DataOutputStream salida;
    String nombre;
+   public ThreadCliente thread;
    //Jugador
    //Referencia a figura
 
@@ -78,7 +79,9 @@ public class Cliente {//Solamente pinta la pantalla
          
       }
 
-      new ThreadCliente(entrada, salida,pantallaTablero).start();//Meter dentro del try
+      thread = new ThreadCliente(entrada, salida,pantallaTablero);
+      thread.pantalla.tableroGrafico.setPantallaCliente(this);
+      thread.start();//Meter dentro del try
       //Aqui se podria setear la ficha
       
     }

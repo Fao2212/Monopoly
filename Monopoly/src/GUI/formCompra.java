@@ -22,6 +22,7 @@ public class formCompra extends javax.swing.JFrame {
     public formCompra(ThreadCliente thread) {
         initComponents();
         this.thread = thread;
+        labelComprarPropiedad.setIcon(thread.propImages[thread.posActual]);
     }
 
     /**
@@ -36,7 +37,7 @@ public class formCompra extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        labelComprarPropiedad = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -59,10 +60,8 @@ public class formCompra extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2);
         jButton2.setBounds(300, 140, 90, 32);
-
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 20, 270, 390);
+        jPanel1.add(labelComprarPropiedad);
+        labelComprarPropiedad.setBounds(10, 20, 270, 390);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,7 +106,7 @@ public class formCompra extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    public javax.swing.JLabel labelComprarPropiedad;
     // End of variables declaration//GEN-END:variables
 }

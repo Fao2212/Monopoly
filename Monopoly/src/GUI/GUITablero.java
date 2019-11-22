@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Server.Cliente;
+import Server.ThreadCliente;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -22,11 +24,16 @@ public class GUITablero {
     public Color colores[] = {Color.red,Color.blue,Color.orange,Color.green,Color.CYAN,Color.yellow,Color.red};
     int xpos1;
     int ypos1;
+    Cliente cliente;
 
     public GUITablero(JLabel tablero) {
         
         this.tablero = tablero;
         setearTablero();
+    }
+    
+    public void setPantallaCliente(Cliente ptablero){
+        this.cliente = ptablero;
     }
     
     public GUIFicha siguienteEspacio(customLabel casilla){//Metodo del ERROR
@@ -85,7 +92,7 @@ public class GUITablero {
             tile.label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e){
-                System.out.println(tile.numeroDeCasilla+tile.toString());
+                cliente.thread.pantalla.mostrarPropiedad(cliente.thread.propImages[tile.numeroDeCasilla]);
             }});
             
             if(i == 0)
@@ -105,7 +112,7 @@ public class GUITablero {
             tile.label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e){
-                System.out.println(tile.numeroDeCasilla+tile.toString());
+                cliente.thread.pantalla.mostrarPropiedad(cliente.thread.propImages[tile.numeroDeCasilla]);
             }});
             
             ypos1 += tile.dimensiony;
@@ -130,7 +137,7 @@ public class GUITablero {
             tile.label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e){
-                System.out.println(tile.numeroDeCasilla+tile.toString());
+                cliente.thread.pantalla.mostrarPropiedad(cliente.thread.propImages[tile.numeroDeCasilla]);
             }});
             
             if(i == 20)
@@ -155,7 +162,7 @@ public class GUITablero {
             tile.label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e){
-                System.out.println(tile.numeroDeCasilla+tile.toString());
+                cliente.thread.pantalla.mostrarPropiedad(cliente.thread.propImages[tile.numeroDeCasilla]);
             }});
            
             tile.label.setBounds(610-xpos1,700-ypos1,tile.dimensionx,tile.dimensiony);

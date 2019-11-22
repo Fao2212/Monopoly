@@ -21,6 +21,9 @@ import GUI.formCompra;
 import GUI.formTarjeta;
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import monopoly.Tablero;
 
@@ -33,7 +36,7 @@ public class ThreadCliente extends Thread{
     Socket cliente; 
     DataInputStream entrada;
     DataOutputStream salida;
-    formTablero pantalla;//Este seria el juego con el tablero PINTA SU PROPIO JUEGO
+    public formTablero pantalla;//Este seria el juego con el tablero PINTA SU PROPIO JUEGO
     boolean running;
     boolean empezado;
     public boolean tirarDados;
@@ -43,8 +46,14 @@ public class ThreadCliente extends Thread{
     int maxPlayers;
     GUIFicha lastTile;
     int tirosInicio;
-    int posActual;
-
+    public int posActual;
+    public ImageIcon propImages[];
+    String pathPropiedades = "C:\\Users\\ferol\\OneDrive\\Documentos\\GitHub\\Monopoly\\Monopoly\\src\\GUI\\propiedades";
+    ImageIcon cchestImages[];
+    String pathChest = "C:\\Users\\ferol\\OneDrive\\Documentos\\GitHub\\Monopoly\\Monopoly\\src\\GUI\\cchest";
+    ImageIcon chanceImages[];
+    String pathChance = "C:\\Users\\ferol\\OneDrive\\Documentos\\GitHub\\Monopoly\\Monopoly\\src\\GUI\\chance";
+    
     public ThreadCliente(DataInputStream entrada, DataOutputStream salida, formTablero pantalla) {
         this.running = true;
         this.pantalla = pantalla;
@@ -54,8 +63,33 @@ public class ThreadCliente extends Thread{
         this.empezado = true;
         this.tirosInicio = 0;
         this.tirarDados = true;
+        cargarImagenesPropiedades();
+        cargarImagenesChest();
+        cargarImagenesChance();
     }
     
+    public void cargarImagenesPropiedades(){
+        propImages = new ImageIcon[40];
+        for (int i = 0; i < propImages.length; i++) {
+            ImageIcon imagen = new ImageIcon(pathPropiedades+"\\"+i+".png");
+            propImages[i] = imagen;
+        }
+        
+    }
+    public void cargarImagenesChest(){
+        cchestImages = new ImageIcon[17];
+        for (int i = 0; i < cchestImages.length; i++) {
+            ImageIcon imagen = new ImageIcon(pathChest+"\\"+i+".png");
+            cchestImages[i] = imagen;
+        }
+    }
+    public void cargarImagenesChance(){
+        chanceImages = new ImageIcon[16];
+        for (int i = 0; i < chanceImages.length; i++) {
+            ImageIcon imagen = new ImageIcon(pathChance+"\\"+i+".png");
+            chanceImages[i] = imagen;
+        }
+    }
     @Override
     public void run() {
         int opcion;
