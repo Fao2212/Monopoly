@@ -5,7 +5,7 @@
             <url>src/Server/ThreadCliente.java</url>
             <bookmark id="1">
                 <name/>
-                <line>115</line>
+                <line>145</line>
                 <key/>
             </bookmark>
         </file>
@@ -14,8 +14,14 @@
         <group>
             <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/Server/ThreadServer.java</file>
             <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/Server/ThreadCliente.java</file>
+            <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/GUI/GUITablero.java</file>
+            <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/GUI/formTablero.java</file>
             <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/monopoly/Casilla.java</file>
+            <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/monopoly/Tablero.java</file>
+            <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/monopoly/Propiedad.java</file>
             <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/Server/Server.java</file>
+            <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/GUI/customLabel.java</file>
+            <file>file:/C:/Users/ferol/OneDrive/Documentos/GitHub/Monopoly/Monopoly/src/GUI/formTarjeta.java</file>
         </group>
     </open-files>
 </project-private>
